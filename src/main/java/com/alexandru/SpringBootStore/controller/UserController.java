@@ -1,5 +1,6 @@
 package com.alexandru.SpringBootStore.controller;
 
+import com.alexandru.SpringBootStore.dto.UserDTO;
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -35,9 +36,12 @@ public class UserController {
 
     @PostMapping("/save")
     public String saveUser(@ModelAttribute User user, Model model) {
+        userService.createUser(user);
         model.addAttribute("user", user);
         return "display_form";
     }
+
+
 
 
 }
