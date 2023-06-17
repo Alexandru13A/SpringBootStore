@@ -8,35 +8,34 @@
 
 <h2>Result</h2>
 <table>
-  <tbody>
-  <tr>
-    <td><strong>ID:</strong></td>
-    <td><span th:text="${user.userId}"></span></td>
-  </tr>
-  <tr>
-    <td><strong>First Name:</strong></td>
-    <td><span th:text="${user.lastName}"></span></td>
+    <tbody>
+    <tr>
+        <td><strong>ID:</strong></td>
+        <td><span th:text="${user.userId}"></span></td>
+    </tr>
+    <tr>
+        <td><strong>First Name:</strong></td>
+        <td><span th:text="${user.firstName}"></span></td>
 
-  </tr>
-  <tr>
-    <td><strong>Last Name:</strong></td>
-    <td><span th:text="${user.lastName}"></span></td>
+    </tr>
+    <tr>
+        <td><strong>Last Name:</strong></td>
+        <td><span th:text="${user.lastName}"></span></td>
 
-  </tr>
-  <tr>
-    <td><strong>Email:</strong></td>
-    <td><span th:text="${user.email}"></span></td>
-  </tr>
+    </tr>
+    <tr>
+        <td><strong>Email:</strong></td>
+        <td><span th:text="${user.email}"></span></td>
+    </tr>
 
 
-
-  <tr>
-    <td colspan="2">&nbsp;<a th:href="@{registration_form}"
-                             class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Add
-      new employee
-    </a></td>
-  </tr>
-  </tbody>
+    <tr>
+        <td colspan="2">&nbsp;<a th:href="@{register_form}"
+                                 class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Looks Good,
+            Register
+        </a></td>
+    </tr>
+    </tbody>
 </table>
 
 </body>

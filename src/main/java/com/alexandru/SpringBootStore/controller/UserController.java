@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-
+@RequestMapping("/shopping")
 public class UserController {
 
     private UserService userService;
@@ -40,8 +40,6 @@ public class UserController {
         model.addAttribute("user", user);
         return "display_form";
     }
-
-
 
 
 }
