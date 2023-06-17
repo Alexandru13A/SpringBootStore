@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Result</h2>
+<table>
+  <tbody>
+  <tr>
+    <td><strong>ID:</strong></td>
+    <td><span th:text="${user.userId}"></span></td>
+  </tr>
+  <tr>
+    <td><strong>First Name:</strong></td>
+    <td><span th:text="${user.lastName}"></span></td>
+
+  </tr>
+  <tr>
+    <td><strong>Last Name:</strong></td>
+    <td><span th:text="${user.lastName}"></span></td>
+
+  </tr>
+  <tr>
+    <td><strong>Email:</strong></td>
+    <td><span th:text="${user.email}"></span></td>
+  </tr>
+
+
+
+  <tr>
+    <td colspan="2">&nbsp;<a th:href="@{registration_form}"
+                             class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Add
+      new employee
+    </a></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
