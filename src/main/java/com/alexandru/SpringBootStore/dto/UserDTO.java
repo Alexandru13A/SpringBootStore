@@ -1,14 +1,25 @@
 package com.alexandru.SpringBootStore.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 public class UserDTO {
 
     private long userId;
+
+    @NotBlank(message = "email is required")
     private String email;
+
+    @NotBlank(message = "password is required")
+    @Size(min = 8 , message = "Password must be at least 8 characters long")
     private String password;
+    @NotBlank(message = "first name is required")
     private String firstName;
+    @NotBlank(message = "last name is required")
     private String lastName;
+
     private AddressDTO address;
 
     private List<OrderDTO> orders;

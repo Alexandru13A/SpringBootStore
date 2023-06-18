@@ -25,25 +25,38 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+
+
         }
+        h1{
+        text-align: center;
+        }
+
+
+
+
 
 
     </style>
 </head>
 <body>
 <h1>Registration Form</h1>
-<form th:action="@{/shopping/save}" method="post">
+<form th:action="@{/shopping/save}" method="post" th:object="${user}">
     <label>
         <input type="text" name="firstName" placeholder="First Name" required/>
+        <span th:errors="*{firstName}"></span>
     </label>
     <label>
         <input type="text" name="lastName" placeholder="Last Name" required/>
+        <span th:errors="*{lastName}"></span>
     </label>
     <label>
         <input type="email" name="email" placeholder="Email" required/>
+        <span th:errors="*{email}"></span>
     </label>
     <label>
         <input type="password" name="password" placeholder="Password" required/>
+        <span th:errors="*{password}"></span>
     </label>
     <input type="submit" value="Register"/>
 </form>
