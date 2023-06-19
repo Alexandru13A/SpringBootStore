@@ -59,19 +59,19 @@ public class UserController {
         return "display_form";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/signing")
     public String showLoginForm() {
-        return "login";
+        return "login_form";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/signing")
     public String processLogin(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
         User user = userService.findUserByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("user", user);
             return "redirect:/dashboard";
         } else {
-            return "login";
+            return "redirect:/login_form";
         }
     }
 
