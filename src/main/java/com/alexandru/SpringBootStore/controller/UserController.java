@@ -40,7 +40,11 @@ public class UserController {
     public String saveUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-
+            return "register_form";
+        }
+        if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
+            bindingResult.rejectValue("confirmPassword", "userDTO.confirmPassword", "Password and Confirm Password must match");
+            model.addAttribute("user", userDTO);
             return "register_form";
         }
 

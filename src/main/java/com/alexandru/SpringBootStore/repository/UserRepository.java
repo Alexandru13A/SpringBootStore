@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+
+    @Query("SELECT u FROM User u WHERE u.email = :email")
+    public User findByEmail(String email);
+
     @Modifying
     @Query("UPDATE User u SET u.email =: email WHERE u.userId =: userId")
     int updateUserEmail(Long id, String email);
