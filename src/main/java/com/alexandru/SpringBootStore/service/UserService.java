@@ -41,5 +41,9 @@ public class UserService {
         return userRepository.updateUserLastName(id, lastName);
     }
 
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 
 }

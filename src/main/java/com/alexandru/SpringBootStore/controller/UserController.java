@@ -3,6 +3,7 @@ package com.alexandru.SpringBootStore.controller;
 import com.alexandru.SpringBootStore.dto.UserDTO;
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +57,22 @@ public class UserController {
         userService.createUser(user);
         model.addAttribute("user", user);
         return "display_form";
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String processLogin(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
+        User user = userService.findUserByEmail(email);
+        if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("user", user);
+            return "redirect:/dashboard";
+        } else {
+            return "login";
+        }
     }
 
 
