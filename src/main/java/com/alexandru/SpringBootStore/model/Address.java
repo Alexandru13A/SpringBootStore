@@ -1,6 +1,6 @@
 package com.alexandru.SpringBootStore.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "address")

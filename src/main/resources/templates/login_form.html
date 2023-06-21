@@ -4,31 +4,58 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <style>
-        /* Stiluri CSS pentru formularul de autentificare */
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="username"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
 
     </style>
 </head>
 <body>
 <h1>Login</h1>
-<form th:action="@{/login}" method="post">
-    <label>
-        Email:
-        <input type="email" name="email" required
-               oninvalid="this.setCustomValidity('Enter your email')"
-               oninput="setCustomValidity('')"/>
-    </label>
-    <label>
-        Password:
-        <input type="password" name="password" required
-               oninvalid="this.setCustomValidity('Enter your password')"
-               oninput="setCustomValidity('')"/>
-    </label>
-    <input type="submit" value="Login"/>
+<form method="post" th:action="@{/login}">
+<label>
+    <input
+            id="username"
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            name="username">
+</label>
+<label>
+    <input
+            id="password"
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            name="password">
+</label>
+    <button th:href="@{/register}" type="submit" class="btn btn-black">Don't have an account? Register here.</button>
+<button type="submit" value="Log in" class="btn btn-secondary">Login</button>
 </form>
 </body>
 </html>
-
-
-
-
-

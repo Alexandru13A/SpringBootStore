@@ -1,7 +1,7 @@
 package com.alexandru.SpringBootStore.model;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;

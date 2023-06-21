@@ -1,11 +1,12 @@
 package com.alexandru.SpringBootStore.dto;
 
-import jakarta.validation.constraints.*;
+import lombok.Data;
 
+import javax.validation.constraints.*;
 
 import java.util.List;
 
-
+@Data
 public class UserDTO {
 
     private long userId;

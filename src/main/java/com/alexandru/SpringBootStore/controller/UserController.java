@@ -3,15 +3,15 @@ package com.alexandru.SpringBootStore.controller;
 import com.alexandru.SpringBootStore.dto.UserDTO;
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.service.UserService;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 @Controller
-@RequestMapping("/shopping")
 public class UserController {
 
     private UserService userService;
@@ -59,21 +59,12 @@ public class UserController {
         return "display_form";
     }
 
-    @GetMapping("/signing")
+    @GetMapping("/login")
     public String showLoginForm() {
         return "login_form";
     }
 
-    @PostMapping("/signing")
-    public String processLogin(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
-        User user = userService.findUserByEmail(email);
-        if (user != null && user.getPassword().equals(password)) {
-            session.setAttribute("user", user);
-            return "redirect:/dashboard";
-        } else {
-            return "redirect:/login_form";
-        }
-    }
+
 
 
 }
