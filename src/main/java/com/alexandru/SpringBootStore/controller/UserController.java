@@ -3,6 +3,10 @@ package com.alexandru.SpringBootStore.controller;
 import com.alexandru.SpringBootStore.dto.UserDTO;
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.service.UserService;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -62,6 +66,22 @@ public class UserController {
     @GetMapping("/login")
     public String showLoginForm() {
         return "login_form";
+    }
+    @GetMapping("/dashboard")
+    public String showDashboard(Model model) {
+        // Obține utilizatorul autentificat din contextul de securitate
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // Verifică dacă utilizatorul este autentificat și nu este anonim
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            // Obține detaliile utilizatorului autentificat
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+            // Adaugă detaliile utilizatorului în model
+            model.addAttribute("username", userDetails.getUsername());
+        }
+
+        return "dashboard";
     }
 
 

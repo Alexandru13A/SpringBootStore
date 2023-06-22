@@ -9,6 +9,10 @@
             margin: 0 auto;
         }
 
+        h1{
+        text-align: center;
+        }
+
         input[type="text"],
         input[type="password"] {
             width: 100%;
@@ -31,6 +35,20 @@
             cursor: pointer;
         }
 
+        button{
+        background-color: #4CAF50;
+         color: white;
+         text-align: center;
+         padding: 5px 10px;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 10px;
+         display:block;
+         border: none;
+        }
+
+
+
 
 
     </style>
@@ -38,24 +56,24 @@
 <body>
 <h1>Login</h1>
 <form method="post" th:action="@{/login}">
-<label>
-    <input
-            id="username"
-            type="text"
-            class="form-control"
-            placeholder="Username"
-            name="username">
-</label>
-<label>
-    <input
-            id="password"
-            type="password"
-            class="form-control"
-            placeholder="Password"
-            name="password">
-</label>
+    <label>
+        <input
+                id="username"
+                type="text"
+                class="form-control"
+                placeholder="Username"
+                name="username">
+    </label>
+    <label>
+        <input
+                id="password"
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                name="password">
+    </label>
+    <button type="submit" value="Log in" class="btn btn-secondary">Login</button>
     <button th:href="@{/register}" type="submit" class="btn btn-black">Don't have an account? Register here.</button>
-<button type="submit" value="Log in" class="btn btn-secondary">Login</button>
 </form>
 </body>
 </html>

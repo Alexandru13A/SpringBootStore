@@ -9,8 +9,8 @@
 </head>
 <body>
 <h1>Dashboard</h1>
-<div th:if="${session.user != null}">
-    Welcome, <span th:text="${session.user.firstName}"></span>!
+<div th:if="${user != null}">
+    Welcome, <span th:text="${user.firstName}"></span>!
 </div>
 </body>
 </html>
