@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <style>
-        /* Stiluri CSS pentru pagina de dashboard */
-    </style>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 </head>
 <body>
+<header>
+
+    <nav>
+        <ul>
+            <li><a th:href="@{/shopping/home} ">Home</a></li>
+            <li><a th:href="@{/shopping/home} ">Products</a></li>
+            <li><a th:href="@{/shopping/home} ">Contact</a></li>
+            <li style="float: right;"><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+
+</header>
+
 <h1>Dashboard</h1>
-<div th:if="${user != null}">
-    Welcome, <span th:text="${user.firstName}"></span>!
+<div>
+    Welcome, <span th:text="${fullName}"></span>!
 </div>
 </body>
 </html>

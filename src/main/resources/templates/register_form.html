@@ -14,15 +14,20 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
+            margin-left: auto;
+         margin-right: auto;
         }
 
         input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
+                background-color: #4CAF50;
+         color: white;
+         text-align: center;
+         padding: 5px 10px;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 10px;
+         display:block;
+         border: none;
             cursor: pointer;
 
 
@@ -30,26 +35,32 @@
         h1{
         text-align: center;
         }
-
-
-
-
-
+          a{
+             margin-top: 10px;
+             display: block;
+             text-align: center;
+        }
 
 
     </style>
 </head>
 <body>
 <h1>Registration Form</h1>
-<form th:action="@{/shopping/save}" method="post" th:object="${user}">
+<form th:action="@{/save}" method="post" th:object="${user}">
     <label>
-        <input type="text" name="firstName" placeholder="First Name" required
+        <input type="text"
+               name="firstName"
+               placeholder="First Name"
+               required
                oninvalid="this.setCustomValidity('Please enter your first name')"
                oninput="setCustomValidity('')"/>
 
     </label>
     <label>
-        <input type="text" name="lastName" placeholder="Last Name" required
+        <input type="text"
+               name="lastName"
+               placeholder="Last
+               Name" required
                oninvalid="this.setCustomValidity('Please enter your last name')"
                oninput="setCustomValidity('')"/>
     </label>
@@ -70,6 +81,7 @@
         <span th:errors="*{confirmPassword}"></span>
     </label>
     <input type="submit" value="Register"/>
+    <a th:href="@{/login}">You have an account. Login here.</a>
 </form>
 
 

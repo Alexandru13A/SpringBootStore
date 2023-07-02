@@ -29,9 +29,15 @@ public class UserDTO {
     @NotEmpty
     private String confirmPassword;
 
+    private String fullName = firstName + lastName;
+
     private AddressDTO address;
 
     private List<OrderDTO> orders;
+
+
+
+
 
 
     public String getConfirmPassword() {

@@ -46,6 +46,13 @@
          display:block;
          border: none;
         }
+        a{
+            margin-top: 10px;
+            display: block;
+            text-align: center;
+        }
+
+
 
 
 
@@ -61,7 +68,7 @@
                 id="username"
                 type="text"
                 class="form-control"
-                placeholder="Username"
+                placeholder="Email"
                 name="username">
     </label>
     <label>
@@ -72,8 +79,8 @@
                 placeholder="Password"
                 name="password">
     </label>
-    <button type="submit" value="Log in" class="btn btn-secondary">Login</button>
-    <button th:href="@{/register}" type="submit" class="btn btn-black">Don't have an account? Register here.</button>
+    <button type="submit" value="Log in" class="btn btn-primary" id="Login-submit">Login</button>
+    <a th:href="@{/register}">Don't have an account? Register here.</a>
 </form>
 </body>
 </html>

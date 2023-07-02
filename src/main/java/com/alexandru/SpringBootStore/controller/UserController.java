@@ -3,25 +3,25 @@ package com.alexandru.SpringBootStore.controller;
 import com.alexandru.SpringBootStore.dto.UserDTO;
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.service.UserService;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private BCryptPasswordEncoder passwordEncoder;
     private UserService userService;
 
 
-    public UserController(UserService userService) {
+    public UserController(BCryptPasswordEncoder passwordEncoder, UserService userService) {
+        this.passwordEncoder = passwordEncoder;
         this.userService = userService;
     }
 
@@ -57,8 +57,17 @@ public class UserController {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userService.createUser(user);
+
+        try {
+            userService.createUser(user);
+            logger.info("Utilizatorul a fost salvat în baza de date: {}", user);
+        } catch (Exception e) {
+            logger.error("Eroare la salvarea utilizatorului în baza de date: {}", e.getMessage());
+            e.printStackTrace();
+        }
+
         model.addAttribute("user", user);
         return "display_form";
     }
@@ -67,24 +76,12 @@ public class UserController {
     public String showLoginForm() {
         return "login_form";
     }
-    @GetMapping("/dashboard")
-    public String showDashboard(Model model) {
-        // Obține utilizatorul autentificat din contextul de securitate
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Verifică dacă utilizatorul este autentificat și nu este anonim
-        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
-            // Obține detaliile utilizatorului autentificat
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-            // Adaugă detaliile utilizatorului în model
-            model.addAttribute("username", userDetails.getUsername());
-        }
-
+    @GetMapping("/logout")
+    public String logout() {
         return "dashboard";
     }
-
-
 
 
 }
