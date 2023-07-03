@@ -3,25 +3,25 @@ package com.alexandru.SpringBootStore.controller;
 import com.alexandru.SpringBootStore.dto.UserDTO;
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Controller
 public class UserController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     private UserService userService;
 
 
-    public UserController(BCryptPasswordEncoder passwordEncoder, UserService userService) {
-        this.passwordEncoder = passwordEncoder;
+    public UserController(UserService userService) {
+
         this.userService = userService;
     }
 
@@ -32,6 +32,11 @@ public class UserController {
         return "users";
     }
 
+
+    @GetMapping("/")
+    public String showIndex() {
+        return "index";
+    }
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
@@ -59,14 +64,6 @@ public class UserController {
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userService.createUser(user);
-
-        try {
-            userService.createUser(user);
-            logger.info("Utilizatorul a fost salvat în baza de date: {}", user);
-        } catch (Exception e) {
-            logger.error("Eroare la salvarea utilizatorului în baza de date: {}", e.getMessage());
-            e.printStackTrace();
-        }
 
         model.addAttribute("user", user);
         return "display_form";

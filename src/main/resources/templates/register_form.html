@@ -59,8 +59,7 @@
     <label>
         <input type="text"
                name="lastName"
-               placeholder="Last
-               Name" required
+               placeholder="Last Name" required
                oninvalid="this.setCustomValidity('Please enter your last name')"
                oninput="setCustomValidity('')"/>
     </label>
@@ -80,7 +79,7 @@
                oninput="setCustomValidity('')"/>
         <span th:errors="*{confirmPassword}"></span>
     </label>
-    <input type="submit" value="Register"/>
+    <input type="submit" name="register" value="Register" class="btn btn-success">
     <a th:href="@{/login}">You have an account. Login here.</a>
 </form>
 

@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            margin-right: 10px;
+        }
+
+    </style>
 </head>
 <body>
 
 <h2>Result</h2>
+
 <table>
     <tbody>
     <tr>
@@ -28,12 +39,13 @@
         <td><span th:text="${user.email}"></span></td>
     </tr>
 
-
     <tr>
-        <td colspan="2">&nbsp;<a th:href="@{register_form}"
-                                 class="btn btn-success"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Looks Good,
-            Register
-        </a></td>
+        <td colspan="2">
+            <div class="button-container">
+                <button type="button" onclick="javascript:history.back()" class="btn btn-secondary">Back</button>
+                <button type="submit" class="btn btn-success">Continue</button>
+            </div>
+        </td>
     </tr>
     </tbody>
 </table>
