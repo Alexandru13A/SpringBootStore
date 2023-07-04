@@ -38,7 +38,7 @@ public class HomeController {
 
         }
 
-        return "dashboard";
+        return "home/dashboard";
     }
 
 }

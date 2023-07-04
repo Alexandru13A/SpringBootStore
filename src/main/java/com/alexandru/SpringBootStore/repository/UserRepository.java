@@ -19,10 +19,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     int updateUserEmail(Long id, String email);
 
     @Modifying
-    @Query("UPDATE User u SET u.firstName =: firstName WHERE u.userId =: userId")
+    @Query("UPDATE User u SET u.firstName =: firstName WHERE u.email =: email")
     int updateUserFirstName(Long id, String firstName);
 
     @Modifying
-    @Query("UPDATE User u SET u.lastName =: lastName WHERE u.userId =: userId")
+    @Query("UPDATE User u SET u.lastName =: lastName WHERE u.email =: email")
     int updateUserLastName(Long id, String lastName);
 }
