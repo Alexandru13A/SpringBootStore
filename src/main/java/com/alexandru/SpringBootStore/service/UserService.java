@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -64,12 +65,12 @@ public class UserService implements UserDetailsService {
         return userRepository.updateUserEmail(id, email);
     }
 
-    public int updateFirstName(Long id, String firstName) {
-        return userRepository.updateUserFirstName(id, firstName);
+    public void updateFirstName(String email, String firstName) {
+        userRepository.updateUserFirstName(email, firstName);
     }
 
-    public int updateLastName(Long id, String lastName) {
-        return userRepository.updateUserLastName(id, lastName);
+    public int updateLastName(String email, String lastName) {
+        return userRepository.updateUserLastName(email, lastName);
     }
 
 
