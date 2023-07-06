@@ -3,46 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>User Register</title>
-    <style>
-        form {
-            width: 300px;
-            margin: 0 auto;
-        }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            margin-left: auto;
-         margin-right: auto;
-        }
-
-        input[type="submit"] {
-                background-color: #4CAF50;
-         color: white;
-         text-align: center;
-         padding: 5px 10px;
-         margin-left: auto;
-         margin-right: auto;
-         margin-top: 10px;
-         display:block;
-         border: none;
-            cursor: pointer;
+    <link rel="stylesheet" th:href="@{/css/register.css}">
 
 
-        }
-        h1{
-        text-align: center;
-        }
-          a{
-             margin-top: 10px;
-             display: block;
-             text-align: center;
-        }
-
-
-    </style>
 </head>
 <body>
 <h1>Registration Form</h1>
@@ -54,7 +17,6 @@
                required
                oninvalid="this.setCustomValidity('Please enter your first name')"
                oninput="setCustomValidity('')"/>
-
     </label>
     <label>
         <input type="text"

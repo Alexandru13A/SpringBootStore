@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+     .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            margin-right: 10px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<h2> User Address </h2>
+
+<table>
+    <tbody>
+    <tr>
+        <td><strong>Address 1:</strong></td>
+        <td><span th:text="${address.address1}"></span></td>
+    </tr>
+    <tr>
+        <td><strong>Address 2:</strong></td>
+        <td><span th:text="${address.address2}"></span></td>
+
+    </tr>
+    <tr>
+        <td><strong>City:</strong></td>
+        <td><span th:text="${address.city}"></span></td>
+
+    </tr>
+    <tr>
+        <td><strong>Country:</strong></td>
+        <td><span th:text="${address.country}"></span></td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <div class="button-container">
+                <button type="button" onclick="javascript:history.back()" class="btn btn-secondary">Back</button>
+                <a href="/shopping/dashboard" class="btn btn-success">Continue</a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

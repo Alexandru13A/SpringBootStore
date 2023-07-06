@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
 
 
     @Query("SELECT u FROM User u WHERE u.email = :email")
@@ -20,10 +22,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     int updateUserEmail(Long id, String email);
 
 
-
     @Modifying
-    @Query("UPDATE User u SET u.firstName = :firstName WHERE u.email = :email")
-    void updateUserFirstName(@Param("email") String email, @Param("firstName") String firstName);
+    @Transactional
+    @Query("UPDATE User u SET u.firstName = :firstName WHERE u.userId = :userId")
+    void updateFirstName(@Param("userId") Long userId, @Param("firstName") String firstName);
 
 
     @Query("UPDATE User u SET u.lastName =: lastName WHERE u.email =: email")

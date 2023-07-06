@@ -116,8 +116,8 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getFullName(String firstName,String lastName) {
+    public String getFullName(String firstName, String lastName) {
         String fullName;
-      return  fullName = firstName + " " + lastName;
+        return fullName = firstName + " " + lastName;
     }
 }

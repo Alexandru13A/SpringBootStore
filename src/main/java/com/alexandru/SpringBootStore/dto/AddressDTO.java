@@ -1,13 +1,22 @@
 package com.alexandru.SpringBootStore.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class AddressDTO {
 
-    private long addressId;
 
+    private long addressId;
+    @NotEmpty
+    @Size(min = 4)
     private String address1;
+
+    @Size(min = 4)
     private String address2;
 
+    @NotEmpty
     private String city;
+    @NotEmpty
     private String country;
 
 

@@ -3,34 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Account Settings</title>
-    <style>
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-        }
+    <link rel="stylesheet" th:href="@{/css/account_settings.css}">
 
-        .form-container form {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .form-container form label {
-            margin-right: 10px;
-        }
-
-        .form-container form input[type="text"],
-        .form-container form input[type="email"] {
-            margin-right: 10px;
-        }
-
-        .form-container form button {
-            margin-left: 10px;
-        }
-    </style>
 </head>
 <body>
 <h1>Account Settings</h1>
@@ -40,23 +14,29 @@
 <p>Email: <span th:text="${email}"></span></p>
 
 <div class="form-container">
-    <form th:action="@{/shopping/user/firstNameUpdate}"  method="post">
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" th:value="${firstName}" />
+    <form th:action="@{/shopping/user/updateFirstName}" th:method="POST" th:object="${user}">
+        <label for="newFirstName">First Name:</label>
+        <input type="text" id="newFirstName" name="newFirstName" th:value="${firstName}"
+               required
+               pattern=".*\S+.*"/>
         <button type="submit">Change First Name</button>
     </form>
 
-    <form th:action="@{/account/updateLastName}" method="post">
+    <form th:action="@{/shopping/user/updateLastName}" th:method="post" th:object="${user}">
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" th:value="${lastName}" />
+        <input type="text" id="lastName" name="newLastName" th:value="${lastName}"
+               required
+               pattern=".*\S+.*"/>
         <button type="submit">Change Last Name</button>
     </form>
 
     <form th:action="@{/account/updateEmail}" method="post">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" th:value="${email}" />
+        <input type="email" id="email" name="email" th:value="${email}"/>
         <button type="submit">Change Email</button>
     </form>
 </div>
 </body>
 </html>
+
+

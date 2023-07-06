@@ -5,6 +5,8 @@ import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -65,9 +67,10 @@ public class UserService implements UserDetailsService {
         return userRepository.updateUserEmail(id, email);
     }
 
-    public void updateFirstName(String email, String firstName) {
-        userRepository.updateUserFirstName(email, firstName);
+    public void updateFirstName(Long id, String firstName) {
+        userRepository.updateFirstName(id, firstName);
     }
+
 
     public int updateLastName(String email, String lastName) {
         return userRepository.updateUserLastName(email, lastName);
