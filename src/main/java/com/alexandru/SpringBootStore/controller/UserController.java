@@ -39,6 +39,10 @@ public class UserController {
         User user = userService.getUserByEmail(userDetails.getUsername());
         model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
         model.addAttribute("email", user.getEmail());
+
+        Address address = user.getAddress();
+        model.addAttribute("address", address);
+
         return "account/account_settings";
     }
 
@@ -55,12 +59,17 @@ public class UserController {
             return "account/account_settings";
         }
 
+
         // Actualizează numele de familie al utilizatorului
         user.setFirstName(newFirstName);
         userService.createUser(user);
 
         model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
         model.addAttribute("email", user.getEmail());
+        Address address = user.getAddress();
+        model.addAttribute("address", address);
+
+
         return "account/account_settings";
     }
 
@@ -83,6 +92,9 @@ public class UserController {
 
         model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
         model.addAttribute("email", user.getEmail());
+        Address address = user.getAddress();
+        model.addAttribute("address", address);
+
 
         return "account/account_settings";
     }
@@ -95,6 +107,7 @@ public class UserController {
     public String addAddressToUser(Model model) {
         AddressDTO addressDTO = new AddressDTO();
         model.addAttribute("address", addressDTO);
+        model.addAttribute("username", userService.getLoggedInUsername());
         return "account/address_form";
     }
 
@@ -103,7 +116,6 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
-        model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
 
         if (bindingResult.hasErrors()) {
             return "account/address_form";
@@ -123,9 +135,48 @@ public class UserController {
         return "account/display_address";
     }
 
+
+    @PostMapping("/modifyAddress1")
+    public String updateAddress1(@RequestParam("address1") String address1, Model model) {
+        addressService.modifyAddress1(address1, model);
+        return "account/modify_address";
+    }
+
+    @PostMapping("/modifyAddress2")
+    public String updateAddress2(@RequestParam("address2") String address2, Model model) {
+        addressService.modifyAddress2(address2, model);
+        return "account/modify_address";
+    }
+
+    @PostMapping("/modifyCity")
+    public String updateCity(@RequestParam("city") String city, Model model) {
+        addressService.modifyCity(city, model);
+        return "account/modify_address";
+    }
+
+    @PostMapping("/modifyCountry")
+    public String updateCountry(@RequestParam("country") String country, Model model) {
+        addressService.modifyCountry(country, model);
+        return "account/modify_address";
+    }
+
+    @GetMapping("/modifyAddress")
+    public String addressSettings(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = userService.getUserByEmail(userDetails.getUsername());
+
+
+        Address address = user.getAddress();
+        model.addAttribute("address", address);
+
+        return "account/modify_address";
+    }
+
+
     //ORDERS
 
-    //LOGOUT
+
 
 
 }

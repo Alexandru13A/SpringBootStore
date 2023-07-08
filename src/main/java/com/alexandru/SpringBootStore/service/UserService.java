@@ -3,6 +3,7 @@ package com.alexandru.SpringBootStore.service;
 
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.repository.UserRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -67,13 +68,13 @@ public class UserService implements UserDetailsService {
         return userRepository.updateUserEmail(id, email);
     }
 
-    public void updateFirstName(Long id, String firstName) {
-        userRepository.updateFirstName(id, firstName);
-    }
 
-
-    public int updateLastName(String email, String lastName) {
-        return userRepository.updateUserLastName(email, lastName);
+    public String getLoggedInUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            return authentication.getName();
+        }
+        return null;
     }
 
 

@@ -29,8 +29,9 @@ public class User {
     private String lastName;
 
 
-    @Column(name = "user_role")
-    private String role = "USER";
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="roleId")
+    private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressId")
@@ -52,11 +53,11 @@ public class User {
         this.orders = orders;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

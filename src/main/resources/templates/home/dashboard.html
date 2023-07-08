@@ -15,6 +15,12 @@
             <li><a th:href="@{/shopping/home}">Products</a></li>
             <li><a th:href="@{/shopping/home}">Contact</a></li>
             <li class="ml-auto dropdown">
+                <a href="#">Cart</a>
+                <div class="dropdown-menu">
+                    <a th:href="@{/shopping/user/settings}">View Cart</a>
+                </div>
+            </li>
+            <li class="ml-auto dropdown">
                 <a href="#">Account</a>
                 <div class="dropdown-menu">
                     <a th:href="@{/shopping/user/settings}">Settings</a>

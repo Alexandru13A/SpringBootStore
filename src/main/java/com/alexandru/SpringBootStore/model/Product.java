@@ -34,6 +34,14 @@ public class Product {
     private List<Cart> carts = new ArrayList<>();
 
 
+    public byte[] getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(byte[] productImage) {
+        this.productImage = productImage;
+    }
+
     public List<Cart> getCarts() {
         return carts;
     }
