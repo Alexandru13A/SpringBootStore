@@ -27,6 +27,9 @@ public class Product {
     @Column(name = "product_price")
     private BigDecimal price;
 
+    @Column(name = "product_category")
+    private String category;
+
     @Column(name = "product_image")
     private byte[] productImage;
 
@@ -40,6 +43,14 @@ public class Product {
 
     public void setProductImage(byte[] productImage) {
         this.productImage = productImage;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public List<Cart> getCarts() {
