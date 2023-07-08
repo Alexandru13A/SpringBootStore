@@ -23,10 +23,6 @@ public class AccountController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String showIndex() {
-        return "index";
-    }
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {

@@ -26,18 +26,29 @@ public class HomeController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String redirectByRole(Authentication authentication) {
-        if (authentication != null && authentication.isAuthenticated()) {
-            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-            if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
-                return "redirect:/shopping/admin/dashboard";
-            } else if (authorities.stream().anyMatch(a -> a.getAuthority().equals("USER"))) {
-                return "redirect:/shopping/user/dashboard";
+    @GetMapping("/dashboard")
+    public String redirectByRole(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        User user = userService.getUserByEmail(email);
+        String fullName = user.getFullName(user.getFirstName(), user.getLastName());
+        model.addAttribute("fullName", fullName);
+
+        if (user != null) {
+                String role = user.getRole();
+
+                if (role.equals("ADMIN")) {
+                    return "redirect:/shopping/admin/dashboard";
+                } else if (role.equals("USER")) {
+                    return "redirect:/shopping/user/dashboard";
+                }
             }
-        }
-        return "redirect:/";
+
+        return "registerandlogin/login_form";
     }
+
+
+
 
     @GetMapping("/user/dashboard")
     public String showUserDashboard(Model model) {
