@@ -8,16 +8,16 @@
 </head>
 <body>
 <h1>Account Settings</h1>
-<a th:href="@{/shopping/dashboard}">Home</a>
+<a th:href="@{/shopping/user/dashboard}">Home</a>
 
 <h4>Name: <span th:text="${username}"></span></h4>
 <p>Email: <span th:text="${email}"></span></p>
 <hr class="line"/>
 <h4>Address :</h4>
-<p>Address 1: <span th:text="${address.address1}"></span></p>
-<p>Address 2: <span th:text="${address.address2}"></span></p>
-<p>City: <span th:text="${address.city}"></span></p>
-<p>Country: <span th:text="${address.country}"></span></p>
+<p>Address 1: <span th:if="${address == null}">No address</span><span th:unless="${address == null}" th:text="${address.address1}"></span></p>
+<p>Address 2: <span th:if="${address == null}">No address</span><span th:unless="${address == null}" th:text="${address.address2}"></span></p>
+<p>City: <span th:if="${address == null}">No address</span><span th:unless="${address == null}" th:text="${address.city}"></span></p>
+<p>Country: <span th:if="${address == null}">No address</span><span th:unless="${address == null}" th:text="${address.country}"></span></p>
 
 <a th:href="@{/shopping/user/modifyAddress}">Modify address</a>
 

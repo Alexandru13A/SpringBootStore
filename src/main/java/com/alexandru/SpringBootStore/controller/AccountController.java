@@ -28,7 +28,7 @@ public class AccountController {
     public String showRegisterForm(Model model) {
         UserDTO userDTO = new UserDTO();
         model.addAttribute("user", userDTO);
-        return "registerandlogin/register_form";
+        return "authentication/register_form";
     }
 
 
@@ -36,12 +36,12 @@ public class AccountController {
     public String saveUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "registerandlogin/register_form";
+            return "authentication/register_form";
         }
         if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
             bindingResult.rejectValue("confirmPassword", "userDTO.confirmPassword", "Password and Confirm Password must match");
             model.addAttribute("user", userDTO);
-            return "registerandlogin/register_form";
+            return "authentication/register_form";
         }
 
         User user = new User();
@@ -52,12 +52,12 @@ public class AccountController {
         userService.createUser(user);
 
         model.addAttribute("user", user);
-        return "registerandlogin/display_form";
+        return "authentication/display_form";
     }
 
     @GetMapping("/login")
     public String showLoginForm() {
-        return "registerandlogin/login_form";
+        return "authentication/login_form";
     }
 
 

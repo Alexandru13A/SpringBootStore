@@ -46,6 +46,59 @@ public class AddressService {
         addressRepository.save(address);
     }
 
+    public void adminModifyAddress1(Long id, String modify, Model model) {
+        User user = userService.getUserById(id);
+        if (user != null) {
+            user.setUserId(id);
+            Address address = user.getAddress();
+            if (address != null) {
+                address.setAddress1(modify);
+                saveAddress(address);
+                model.addAttribute("address", address);
+                model.addAttribute("userId",user.getUserId());
+            }
+        }
+    }
+    public void adminModifyAddress2(Long id, String modify, Model model) {
+        User user = userService.getUserById(id);
+        if (user != null) {
+            user.setUserId(id);
+            Address address = user.getAddress();
+            if (address != null) {
+                address.setAddress2(modify);
+                saveAddress(address);
+                model.addAttribute("address", address);
+                model.addAttribute("userId",user.getUserId());
+            }
+        }
+    }
+    public void adminModifyCity(Long id, String modify, Model model) {
+        User user = userService.getUserById(id);
+        if (user != null) {
+            user.setUserId(id);
+            Address address = user.getAddress();
+            if (address != null) {
+                address.setCity(modify);
+                saveAddress(address);
+                model.addAttribute("address", address);
+                model.addAttribute("userId",user.getUserId());
+            }
+        }
+    }
+    public void adminModifyCountry(Long id, String modify, Model model) {
+        User user = userService.getUserById(id);
+        if (user != null) {
+            user.setUserId(id);
+            Address address = user.getAddress();
+            if (address != null) {
+                address.setCountry(modify);
+                saveAddress(address);
+                model.addAttribute("address", address);
+                model.addAttribute("userId",user.getUserId());
+            }
+        }
+    }
+
     public void modifyAddress1(String modify, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();

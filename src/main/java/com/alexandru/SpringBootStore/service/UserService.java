@@ -45,6 +45,7 @@ public class UserService implements UserDetailsService {
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
     private Collection<? extends GrantedAuthority> getAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
@@ -71,6 +72,10 @@ public class UserService implements UserDetailsService {
             return authentication.getName();
         }
         return null;
+    }
+
+    public User getUserById(Long id) {
+        return userRepository.findById(id).get();
     }
 
 

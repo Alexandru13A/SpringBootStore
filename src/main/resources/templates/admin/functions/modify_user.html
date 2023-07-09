@@ -1,10 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>User Update</title>
+    <link rel="stylesheet" th:href="@{/css/account_settings.css}">
 </head>
 <body>
+<h1>Edit User</h1>
+<a th:href="@{/shopping/admin/users}">Back</a>
+
+<h4>Name: <span th:text="${username}"></span></h4>
+<h4>User id: <span th:text="${id}"></span></h4>
+<p>Email: <span th:text="${email}"></span></p>
+<p>Role: <span th:text="${role}"></span></p>
+
+<hr class="line"/>
+
+<h4>Address :</h4>
+<p>Address 1: <span th:if="${address == null}">No address</span><span th:unless="${address == null}"
+                                                                      th:text="${address.address1}"></span></p>
+<p>Address 2: <span th:if="${address == null}">No address</span><span th:unless="${address == null}"
+                                                                      th:text="${address.address2}"></span></p>
+<p>City: <span th:if="${address == null}">No address</span><span th:unless="${address == null}"
+                                                                 th:text="${address.city}"></span></p>
+<p>Country: <span th:if="${address == null}">No address</span><span th:unless="${address == null}"
+                                                                    th:text="${address.country}"></span></p>
+
+<a th:href="@{/shopping/admin/updateAddress/{id}(id=${user.userId})}">Modify address</a>
+
+<hr class="line"/>
+
+<div style="margin-top: 35px;" class="form-container">
+    <form th:action="@{/shopping/admin/updateFirstName/{id}(id=${user.userId})}" th:method="POST" th:object="${user}">
+        <label for="newFirstName">First Name:</label>
+        <input type="text" id="newFirstName" name="newFirstName" th:value="${firstName}"
+               required
+               pattern=".*\S+.*"/>
+        <button type="submit">Change First Name</button>
+    </form>
+
+    <form th:action="@{/shopping/admin/updateLastName/{id}(id=${user.userId})}" th:method="post" th:object="${user}">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="newLastName" th:value="${lastName}"
+               required
+               pattern=".*\S+.*"/>
+        <button type="submit">Change Last Name</button>
+    </form>
+
+    <form th:action="@{/shopping/admin/updateEmail/{id}(id=${user.userId})}" method="post" th:object="${user}">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:value="${email}"/>
+        <button type="submit">Change Email</button>
+    </form>
+    <form th:action="@{/shopping/admin/updateRole/{id}(id=${user.userId})}" method="post" th:object="${user}">
+        <label for="role">Role:</label>
+        <input type="text" id="role" name="newRole" th:value="${role}"/>
+        <button type="submit">Save</button>
+    </form>
+</div>
+
 
 </body>
 </html>

@@ -1,12 +1,11 @@
 package com.alexandru.SpringBootStore.controller;
 
 
-import com.alexandru.SpringBootStore.dto.UserDTO;
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,13 +37,13 @@ public class HomeController {
                 String role = user.getRole();
 
                 if (role.equals("ADMIN")) {
-                    return "redirect:/shopping/admin/dashboard";
+                    return "admin/home/admin_dashboard";
                 } else if (role.equals("USER")) {
-                    return "redirect:/shopping/user/dashboard";
+                    return "users/home/user_dashboard";
                 }
             }
 
-        return "registerandlogin/login_form";
+        return "authentication/login_form";
     }
 
 
@@ -67,7 +66,7 @@ public class HomeController {
 
         return "users/home/user_dashboard";
     }
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin/dashboard")
     public String showAdminDashboard(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

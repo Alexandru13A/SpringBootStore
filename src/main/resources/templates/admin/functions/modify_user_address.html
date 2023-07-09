@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Address</title>
+    <link rel="stylesheet" th:href="@{/css/modify_address.css}">
+</head>
+<body>
+<h1>Modify user address</h1>
+<a th:href="@{/shopping/admin/update/{id}(id=${userId})}">Back</a>
+
+<hr class="line"/>
+<h4>Address :</h4>
+<p>Address 1: <span th:if="${address == null}">No address</span><span th:unless="${address == null}" th:text="${address.address1}"></span></p>
+<p>Address 2: <span th:if="${address == null}">No address</span><span th:unless="${address == null}" th:text="${address.address2}"></span></p>
+<p>City: <span th:if="${address == null}">No address</span><span th:unless="${address == null}" th:text="${address.city}"></span></p>
+<p>Country: <span th:if="${address == null}">No address</span><span th:unless="${address == null}" th:text="${address.country}"></span></p>
+
+<div style="margin-top: 35px;" class="form-container">
+    <form th:action="@{/shopping/admin/modifyAddress1/{id}(id=${userId})}" th:method="POST" th:object="${address}">
+        <label for="address1">Address 1:</label>
+        <input type="text" id="address1" name="address1" th:value="${address1}"
+               required
+               pattern=".*\S+.*"/>
+        <button type="submit">Save</button>
+    </form>
+
+    <form th:action="@{/shopping/admin/modifyAddress2/{id}(id=${userId})}" th:method="post" th:object="${address}">
+        <label for="address2">Address 2:</label>
+        <input type="text" id="address2" name="address2" th:value="${address2}"
+               required
+               pattern=".*\S+.*"/>
+        <button type="submit">Save</button>
+    </form>
+    <form th:action="@{/shopping/admin/modifyCity/{id}(id=${userId})}" th:method="post" th:object="${address}">
+        <label for="city">City :</label>
+        <input type="text" id="city" name="city" th:value="${city}"
+               required
+               pattern=".*\S+.*"/>
+        <button type="submit">Save</button>
+    </form>
+    <form th:action="@{/shopping/admin/modifyCountry/{id}(id=${userId})}" th:method="post" th:object="${address}">
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" th:value="${country}"
+               required
+               pattern=".*\S+.*"/>
+        <button type="submit">Save</button>
+    </form>
+
+
+</div>
+
+
+</body>
+</html>

@@ -8,15 +8,20 @@ public class AddressDTO {
 
     private long addressId;
 
+    @NotEmpty
     @Size(min = 4)
     private String address1;
+
 
     @Size(min = 4)
     private String address2;
 
-
+    @NotEmpty
+    @Size(min = 4)
     private String city;
 
+    @NotEmpty
+    @Size(min = 4)
     private String country;
 
     private String getAllAddress;

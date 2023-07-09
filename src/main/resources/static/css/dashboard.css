@@ -19,6 +19,13 @@
             padding: 5px 10px;
             color: #333;
         }
+        .left-group {
+            margin-right: auto;
+        }
+
+        .right-group {
+            margin-left: auto;
+        }
 
         .ml-auto {
             margin-left: auto;

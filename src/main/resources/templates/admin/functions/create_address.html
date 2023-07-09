@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Address to User</title>
+    <link rel="stylesheet" th:href="@{/css/address_form.css}">
+</head>
+<body>
+<h1>Add address to User</h1>
+<a th:href="@{/shopping/admin/update/{id}(id=${userId})}">Back</a>
+
+<h4>ID: <span th:text="${userId}"></span></h4>
+<h4>Name: <span th:text="${username}"></span></h4>
+
+<form th:action="@{/shopping/admin/createAddress/{id}(id=${userId})}" method="post" th:object="${address}">
+    <label>
+        <input type="text"
+               name="address1"
+               placeholder="Address 1"
+               required
+               oninvalid="this.setCustomValidity('Please enter your address')"
+               oninput="setCustomValidity('')"/>
+    </label>
+    <label>
+        <input type="text"
+               name="lastName"
+               placeholder="Address 2"/>
+    </label>
+    <label>
+        <input type="text"
+               name="city"
+               placeholder="City" required
+               oninvalid="this.setCustomValidity('Please your City')"
+               oninput="setCustomValidity('')"/>
+    </label>
+    <label>
+        <input type="text"
+               name="country"
+               placeholder="Country" required
+               oninvalid="this.setCustomValidity('Please enter a valid password')"
+               oninput="setCustomValidity('')"/>
+    </label>
+
+    <input type="submit" name="register" value="Save" class="btn btn-success">
+
+</form>
+
+</body>
+</html>
