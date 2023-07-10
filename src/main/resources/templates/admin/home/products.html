@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Products</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <h1> Products List </h1>
+    </div>
 
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/shopping/admin/dashboard}" class="btn btn-secondary btn-sm mb-3">Back</a>
+            <a th:href="@{/shopping/admin/createProduct}" class="btn btn-primary btn-sm mb-3">Add Product</a>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th> Name</th>
+            <th> Short Description</th>
+            <th> Long Description</th>
+            <th> Price</th>
+            <th> Category</th>
+            <th> Product Image</th>
+            <th> Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="product: ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.shortDescription}"></td>
+            <td th:text="${product.longDescription}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.category}"></td>
+            <td>
+                <img th:src="@{'data:image/png;base64,' + ${product.productImage}}" alt="Product Image" style="max-width: 50px; max-height: 50px;">
+
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
 </body>
 </html>

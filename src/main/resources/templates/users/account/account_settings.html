@@ -42,7 +42,10 @@
 
     <form th:action="@{/account/updateEmail}" method="post">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" th:value="${email}"/>
+        <input type="email" id="email" name="email" th:value="${email}"
+               required
+               pattern=".*\S+.*"/>
+
         <button type="submit">Change Email</button>
     </form>
 </div>

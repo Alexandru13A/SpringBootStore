@@ -30,6 +30,7 @@ public class Product {
     @Column(name = "product_category")
     private String category;
 
+
     @Column(name = "product_image")
     private byte[] productImage;
 

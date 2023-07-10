@@ -1,19 +1,39 @@
 package com.alexandru.SpringBootStore.dto;
 
+import javax.persistence.Lob;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class ProductDTO {
 
     private long productId;
+    @NotEmpty
     private String name;
 
+    @NotEmpty
     private String shortDescription;
+
+    @NotEmpty
     private String longDescription;
 
+    @NotNull
+    @DecimalMin(value = "0.0", inclusive = true)
+    @DecimalMax(value = "99999.99", inclusive = true)
     private BigDecimal price;
+
+    @NotEmpty
+    private String category;
 
     private byte[] productImage;
 
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public byte[] getProductImage() {
         return productImage;

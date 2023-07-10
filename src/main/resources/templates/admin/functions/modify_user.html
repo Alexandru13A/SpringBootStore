@@ -36,7 +36,7 @@
         <input type="text" id="newFirstName" name="newFirstName" th:value="${firstName}"
                required
                pattern=".*\S+.*"/>
-        <button type="submit">Change First Name</button>
+        <button type="submit">Save</button>
     </form>
 
     <form th:action="@{/shopping/admin/updateLastName/{id}(id=${user.userId})}" th:method="post" th:object="${user}">
@@ -44,17 +44,23 @@
         <input type="text" id="lastName" name="newLastName" th:value="${lastName}"
                required
                pattern=".*\S+.*"/>
-        <button type="submit">Change Last Name</button>
+        <button type="submit">Save</button>
     </form>
 
     <form th:action="@{/shopping/admin/updateEmail/{id}(id=${user.userId})}" method="post" th:object="${user}">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" th:value="${email}"/>
-        <button type="submit">Change Email</button>
+        <input type="email" id="email" name="email" th:value="${email}"
+               required
+               pattern=".*\S+.*"/>
+
+        <button type="submit">Save</button>
     </form>
     <form th:action="@{/shopping/admin/updateRole/{id}(id=${user.userId})}" method="post" th:object="${user}">
         <label for="role">Role:</label>
-        <input type="text" id="role" name="newRole" th:value="${role}"/>
+        <input type="text" id="role" name="newRole" th:value="${role}"
+               required
+               pattern=".*\S+.*"/>
+
         <button type="submit">Save</button>
     </form>
 </div>

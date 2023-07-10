@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+    <style>
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 300px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+<h2>Add Product</h2>
+<a th:href="@{/shopping/admin/products}">Back</a>
+<form th:action="@{/shopping/admin/product/save}" method="post" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required
+           oninvalid="this.setCustomValidity('Enter the product name')"
+           oninput="setCustomValidity('')">
+
+    <label for="category">Category:</label>
+    <input type="text" id="category" name="category" required
+           oninvalid="this.setCustomValidity('Enter the product name')"
+           oninput="setCustomValidity('')">
+
+    <label for="shortDescription">Short Description:</label>
+    <input type="text" id="shortDescription" name="shortDescription" required
+           oninvalid="this.setCustomValidity('Enter the Short Description')"
+           oninput="setCustomValidity('')">
+
+    <label for="longDescription">Long Description:</label>
+    <textarea id="longDescription" name="longDescription" required
+              oninvalid="this.setCustomValidity('Enter the Long Description')"
+              oninput="setCustomValidity('')"></textarea>
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" required
+           oninvalid="this.setCustomValidity('Please enter the Price')"
+           oninput="setCustomValidity('')">
+
+    <label for="file">Image:</label>
+    <input type="file" id="file" name="file" required>
+    <input type="submit" name="register" value="Save" class="btn btn-success">
+</form>
+</body>
+</html>
