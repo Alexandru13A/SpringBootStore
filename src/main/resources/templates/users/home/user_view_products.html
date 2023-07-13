@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/view_products.css}">
+
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li class="left-group">
+                <a th:href="@{/shopping/admin/dashboard}">Home</a>
+                <a th:href="@{/shopping/user/view/products}">Products</a>
+                <a th:href="@{/shopping/contact}">Contact</a>
+            </li>
+            <li class="right-group dropdown">
+                <a href="#">Account</a>
+                <div class="dropdown-menu">
+                    <a th:href="@{/shopping/user/settings}">Settings</a>
+                    <a th:href="@{/shopping/user/cart}">Cart</a>
+                    <a th:href="@{/shopping/user/address}">Address</a>
+                    <a th:href="@{/shopping/user/orders}">Orders</a>
+                    <a th:href="@{/logout}">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<h1>Products</h1>
+
+<!-- Bara de căutare -->
+<form action="/shopping/admin/view/products" method="GET">
+    <input type="text" name="searchTerm" placeholder="Search">
+    <button type="submit">Search</button>
+</form>
+
+<!-- Filtrare și opțiuni de sortare -->
+<div>
+    <label>Filter by:</label>
+    <select name="category">
+        <option value="">All</option>
+        <option value="shoes">Shoes</option>
+        <option value="clothing">Clothing</option>
+    </select>
+    <label>Sort by:</label>
+    <select name="sort">
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+    </select>
+    <button type="submit">Apply</button>
+</div>
+
+<!-- Grid view pentru produse -->
+<div th:each="product : ${products}" class="product-card">
+    <div class="product-link">
+        <a th:href="@{/shopping/user/view/product/{productId}(productId=${product.productId})}">
+            <div class="product-container">
+                <h3 th:text="${product.name}"></h3>
+                <div class="image-container">
+                    <img th:src="@{'/shopping/admin/product/image/' + ${product.productId}}" alt="Product Image" class="product-image" />
+                </div>
+                <p th:text="${product.shortDescription}"></p>
+                <p th:text="${product.price}"></p>
+                <form th:action="@{/shopping/cart}" method="post">
+                    <input type="hidden" th:name="productId" th:value="${product.productId}" />
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+</body>
+</html>

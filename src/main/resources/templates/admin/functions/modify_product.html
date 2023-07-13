@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>User Update</title>
+    <link rel="stylesheet" th:href="@{/css/modify_product.css}">
 </head>
 <body>
+<h1>Edit Product</h1>
+<a th:href="@{/shopping/admin/products}">Back</a>
+
+<h4>Product id: <span th:text="${productId}"></span></h4>
+<h4>Product Name: <span th:text="${name}"></span></h4>
+<p>Product Short Description: <span th:text="${shortDescription}"></span></p>
+<p>Product Long Description: <span th:text="${longDescription}"></span></p>
+<p>Product Price: <span th:text="${price}"></span></p>
+<p>Product Category: <span th:text="${category}"></span></p>
+<td>
+    <img th:src="@{'/shopping/admin/product/image/' + ${product.productId}}" alt="Product Image"
+        class="product-image"/>
+</td>
+
+
+
+
+<hr class="line"/>
+
+<div style="margin-top: 35px;" class="form-container">
+    <form th:action="@{/shopping/admin/saveProduct/{id}(id=${product.productId})}" th:method="post"
+          th:object="${product}" enctype="multipart/form-data">
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" name="name" th:value="${name}"
+               required
+               pattern=".*\S+.*"/>
+
+        <label for="shortDescription">Product Short Description:</label>
+        <input type="text" id="shortDescription" name="shortDescription" th:value="${shortDescription}"
+               required
+               pattern=".*\S+.*"/>
+
+        <label for="longDescription">Long Description:</label>
+        <textarea id="longDescription" name="longDescription" required
+                  pattern=".*\S+.*"
+                  oninvalid="this.setCustomValidity('Enter the Long Description')"
+                  oninput="setCustomValidity('')"></textarea>
+
+
+        <label for="price">Product Price:</label>
+        <input type="number" id="price" name="price" th:value="${price}"
+               required
+               pattern=".*\S+.*"/>
+
+        <label for="category">Product Category:</label>
+        <input type="text" id="category" name="category" th:value="${category}"
+               required
+               pattern=".*\S+.*"/>
+
+        <label for="image">Product Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" />
+
+        <input type="submit" name="save" value="Save" class="btn btn-success">
+    </form>
+
+
+</div>
+
 
 </body>
 </html>

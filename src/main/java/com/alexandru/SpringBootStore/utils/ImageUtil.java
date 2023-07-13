@@ -7,8 +7,8 @@ import java.util.Base64;
 @Component
 public class ImageUtil {
 
-    public static String getBase64Image(byte[] imageData) {
-        return Base64.getEncoder().encodeToString(imageData);
+    public static String getBase64Image(byte[] image) {
+        return Base64.getEncoder().encodeToString(image);
     }
 
 

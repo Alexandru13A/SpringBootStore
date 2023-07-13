@@ -41,8 +41,17 @@
             <td th:text="${product.price}"></td>
             <td th:text="${product.category}"></td>
             <td>
-                <img th:src="@{'data:image/png;base64,' + ${product.productImage}}" alt="Product Image" style="max-width: 50px; max-height: 50px;">
+                <img th:src="@{'/shopping/admin/product/image/' + ${product.productId}}" alt="Product Image"
+                     style="max-with:80px; max-height:80px;"/>
+            </td>
 
+            <td>
+                <a th:href="@{/shopping/admin/updateProduct/{id}(id=${product.productId})}"
+                   class="btn btn-primary">Update</a>
+
+                <a th:href="@{/shopping/admin/deleteProduct/{id}(id=${product.productId})}"
+                   class="btn btn-danger">Delete</a>
+            </td>
         </tr>
         </tbody>
 

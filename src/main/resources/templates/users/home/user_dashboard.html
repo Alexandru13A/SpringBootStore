@@ -8,22 +8,18 @@
 </head>
 <body>
 <header>
-
     <nav>
         <ul>
-            <li><a th:href="@{/shopping/dashboard}">Home</a></li>
-            <li><a th:href="@{/shopping/home}">Products</a></li>
-            <li><a th:href="@{/shopping/home}">Contact</a></li>
-            <li class="ml-auto dropdown">
-                <a href="#">Cart</a>
-                <div class="dropdown-menu">
-                    <a th:href="@{/shopping/user/settings}">View Cart</a>
-                </div>
+            <li class="left-group">
+                <a th:href="@{/shopping/admin/dashboard}">Home</a>
+                <a th:href="@{/shopping/products}">Products</a>
+                <a th:href="@{/shopping/contact}">Contact</a>
             </li>
-            <li class="ml-auto dropdown">
+            <li class="right-group dropdown">
                 <a href="#">Account</a>
                 <div class="dropdown-menu">
                     <a th:href="@{/shopping/user/settings}">Settings</a>
+                    <a th:href="@{/shopping/user/cart}">Cart</a>
                     <a th:href="@{/shopping/user/address}">Address</a>
                     <a th:href="@{/shopping/user/orders}">Orders</a>
                     <a th:href="@{/logout}">Logout</a>
@@ -31,7 +27,6 @@
             </li>
         </ul>
     </nav>
-
 </header>
 
 <h1>Dashboard</h1>

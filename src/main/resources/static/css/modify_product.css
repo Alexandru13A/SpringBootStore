@@ -1,0 +1,32 @@
+
+.form-container {
+  margin-top: 35px;
+}
+
+.form-container label {
+  display: block;
+  margin-top: 10px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container textarea {
+  width: 300px;
+}
+
+.form-container button {
+  margin-top: 10px;
+}
+
+.product-image {
+  max-width: 150px;
+  max-height: 150px;
+}
+.form-container label[for="image"] {
+  display: block;
+  margin-top: 10px;
+}
+
+.form-container input[type="file"] {
+  width: 300px;
+}

@@ -264,7 +264,7 @@ public class AdminController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @DeleteMapping("/admin/delete/{id}")
+    @GetMapping("/admin/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/shopping/admin/users";
@@ -279,7 +279,6 @@ public class AdminController {
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/admin/save")
     public String saveUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, Model model) {
 
@@ -299,7 +298,7 @@ public class AdminController {
         userService.createUser(user);
         model.addAttribute("user", user);
 
-        return "/shopping/admin/users";
+        return "redirect:/shopping/admin/users";
     }
 
 
