@@ -35,7 +35,7 @@
 <h1><span th:text="${product.name}"/></h1>
 
 
-<img th:src="@{'/shopping/admin/product/image/' + ${product.productId}}" alt="Product Image"
+<img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image"
      style="max-width: 400px; max-height: 400px;"/>
 
 <h4><span th:text="${product.shortDescription}"></span></h4>
@@ -44,9 +44,7 @@
 <p>$ <span th:text="${product.price}"/></p>
 
 
-
-<form th:action="@{/shopping/cart}" method="post">
-    <input type="hidden" th:name="productId" th:value="${product.productId}" />
+<form th:action="@{/shopping/admin/addToCart/{productId}(productId=${product.productId})}" method="post">
     <button type="submit">Add to Cart</button>
 </form>
 

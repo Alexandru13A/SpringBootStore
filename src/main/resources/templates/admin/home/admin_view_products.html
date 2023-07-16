@@ -19,7 +19,7 @@
         <a href="#">Account</a>
         <div class="dropdown-menu">
           <a th:href="@{/shopping/user/settings}">Settings</a>
-          <a th:href="@{/shopping/user/cart}">Cart</a>
+          <a th:href="@{/shopping/admin/cart}">Cart</a>
           <a th:href="@{/shopping/user/address}">Address</a>
           <a th:href="@{/shopping/user/orders}">Orders</a>
           <a th:href="@{/shopping/admin/users}">Users</a>
@@ -61,12 +61,11 @@
       <div class="product-container">
         <h3 th:text="${product.name}"></h3>
         <div class="image-container">
-          <img th:src="@{'/shopping/admin/product/image/' + ${product.productId}}" alt="Product Image" class="product-image" />
+          <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image" class="product-image" />
         </div>
         <p th:text="${product.shortDescription}"></p>
         <p th:text="${product.price}"></p>
-        <form th:action="@{/shopping/cart}" method="post">
-          <input type="hidden" th:name="productId" th:value="${product.productId}" />
+        <form th:action="@{/shopping/admin/addToCart/{productId}(productId=${product.productId})}" method="post">
           <button type="submit">Add to Cart</button>
         </form>
       </div>

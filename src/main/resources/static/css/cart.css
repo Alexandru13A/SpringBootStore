@@ -1,0 +1,18 @@
+.product-name{
+ margin-right : 20px;
+}
+.product-price{
+margin-left: 20px;
+}
+
+.product-list table td {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.total-price {
+   border: 1px solid #ccc;
+   padding: 10px;
+   margin-top: 20px;
+   display: inline-block;
+}

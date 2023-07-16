@@ -43,7 +43,7 @@ public class UserController {
         Address address = user.getAddress();
         model.addAttribute("address", address);
 
-        return "users/account/account_settings";
+        return "user/account/account_settings";
     }
 
     //Change first name
@@ -56,7 +56,7 @@ public class UserController {
         if (newFirstName.isEmpty()) {
             model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
             model.addAttribute("email", user.getEmail());
-            return "users/account/account_settings";
+            return "user/account/account_settings";
         }
 
 
@@ -70,7 +70,7 @@ public class UserController {
         model.addAttribute("address", address);
 
 
-        return "users/account/account_settings";
+        return "user/account/account_settings";
     }
 
     //Change last name
@@ -83,7 +83,7 @@ public class UserController {
         if (newLastName.isEmpty()) {
             model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
             model.addAttribute("email", user.getEmail());
-            return "users/account/account_settings";
+            return "user/account/account_settings";
         }
 
         // Actualizează numele de familie al utilizatorului
@@ -96,7 +96,7 @@ public class UserController {
         model.addAttribute("address", address);
 
 
-        return "users/account/account_settings";
+        return "user/account/account_settings";
     }
 
     //Change email
@@ -108,7 +108,7 @@ public class UserController {
         AddressDTO addressDTO = new AddressDTO();
         model.addAttribute("address", addressDTO);
         model.addAttribute("username", userService.getLoggedInUsername());
-        return "users/account/address_form";
+        return "user/account/address_form";
     }
 
     @PostMapping("/saveAddress")
@@ -118,7 +118,7 @@ public class UserController {
         User user = userService.getUserByEmail(userDetails.getUsername());
 
         if (bindingResult.hasErrors()) {
-            return "users/account/address_form";
+            return "user/account/address_form";
         }
 
         Address address = new Address();
@@ -132,32 +132,32 @@ public class UserController {
         userService.createUser(user);
         model.addAttribute("address", address);
 
-        return "users/account/display_address";
+        return "user/account/display_address";
     }
 
 
     @PostMapping("/modifyAddress1")
     public String updateAddress1(@RequestParam("address1") String address1, Model model) {
         addressService.modifyAddress1(address1, model);
-        return "users/account/modify_address";
+        return "user/account/modify_address";
     }
 
     @PostMapping("/modifyAddress2")
     public String updateAddress2(@RequestParam("address2") String address2, Model model) {
         addressService.modifyAddress2(address2, model);
-        return "users/account/modify_address";
+        return "user/account/modify_address";
     }
 
     @PostMapping("/modifyCity")
     public String updateCity(@RequestParam("city") String city, Model model) {
         addressService.modifyCity(city, model);
-        return "users/account/modify_address";
+        return "user/account/modify_address";
     }
 
     @PostMapping("/modifyCountry")
     public String updateCountry(@RequestParam("country") String country, Model model) {
         addressService.modifyCountry(country, model);
-        return "users/account/modify_address";
+        return "user/account/modify_address";
     }
 
     @GetMapping("/modifyAddress")
@@ -170,7 +170,7 @@ public class UserController {
         Address address = user.getAddress();
         model.addAttribute("address", address);
 
-        return "users/account/modify_address";
+        return "user/account/modify_address";
     }
 
 

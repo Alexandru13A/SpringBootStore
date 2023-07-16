@@ -38,10 +38,10 @@ public class AdminController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/admin/users")
+    @GetMapping("/admin/user")
     public String getAllUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        return "admin/home/users";
+        model.addAttribute("user", userService.getAllUsers());
+        return "admin/home/user";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -255,19 +255,17 @@ public class AdminController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
-
-
         Address address = user.getAddress();
         model.addAttribute("address", address);
 
-        return "users/account/modify_address";
+        return "user/account/modify_address";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return "redirect:/shopping/admin/users";
+        return "redirect:/shopping/admin/user";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -298,7 +296,7 @@ public class AdminController {
         userService.createUser(user);
         model.addAttribute("user", user);
 
-        return "redirect:/shopping/admin/users";
+        return "redirect:/shopping/admin/user";
     }
 
 

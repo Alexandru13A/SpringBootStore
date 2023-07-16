@@ -36,7 +36,7 @@ public class ProductController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/admin/products")
+    @GetMapping("/products")
     public String getAllProducts(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
@@ -44,7 +44,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("/admin/product/image/{id}")
+    @GetMapping("/product/image/{id}")
     public ResponseEntity<byte[]> getProductImage(@PathVariable Long id) {
         Product product = productService.getProductById(id);
         byte[] imageBytes = product.getProductImage();
@@ -137,7 +137,6 @@ public class ProductController {
         product.setCategory(productDTO.getCategory());
 
         try {
-            // Verifică dacă un fișier de imagine a fost încărcat
             product.setProductImage(file.getBytes());
         } catch (IOException e) {
             model.addAttribute("error", "Failed to read the image file.");
@@ -170,7 +169,7 @@ public class ProductController {
     @GetMapping("/user/view/products")
     public String userViewProducts(Model model) {
         model.addAttribute("products", productService.getAllProducts());
-        return "users/home/user_view_products";
+        return "user/home/user_view_products";
     }
 
     @GetMapping("/user/view/product/{productId}")
@@ -178,7 +177,7 @@ public class ProductController {
         Product product = productService.getProductById(id);
         product.setProductId(id);
         model.addAttribute("product", product);
-        return "users/home/user_view_product";
+        return "user/home/user_view_product";
     }
 
 

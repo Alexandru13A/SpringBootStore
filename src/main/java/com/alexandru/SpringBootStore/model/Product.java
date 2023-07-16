@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "products")
@@ -101,4 +102,6 @@ public class Product {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+
 }

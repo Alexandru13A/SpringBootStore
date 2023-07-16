@@ -63,7 +63,7 @@ public class AccountController {
 
     @GetMapping("/logout")
     public String logout() {
-        return "users/home/dashboard";
+        return "user/home/dashboard";
     }
 
 

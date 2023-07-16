@@ -23,13 +23,28 @@ public class Cart {
     @OneToOne(mappedBy = "cart")
     private Order order;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "cart",
+            name = "cart_product",
             joinColumns = @JoinColumn(name = "cart_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> products = new ArrayList<>();
+
+
+    public void addProduct(Product product) {
+        products.add(product);
+        product.getCarts().add(this);
+    }
+
+    public void removeProduct(int index) {
+        if (index >= 0 && index < products.size()) {
+            Product product = products.get(index);
+            products.remove(index);
+            product.getCarts().remove(this);
+        }
+    }
+
 
 
     public Order getOrder() {

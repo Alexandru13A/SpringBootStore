@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart Page</title>
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li class="left-group">
+                <a th:href="@{/shopping/dashboard}">Home</a>
+                <a th:href="@{/shopping/admin/view/products}">Products</a>
+                <a th:href="@{/shopping/contact}">Contact</a>
+            </li>
+            <li class="right-group dropdown">
+                <a href="#">Account</a>
+                <div class="dropdown-menu">
+                    <a th:href="@{/shopping/user/settings}">Settings</a>
+                    <a th:href="@{/shopping/cart}">Cart</a>
+                    <a th:href="@{/shopping/user/address}">Address</a>
+                    <a th:href="@{/shopping/user/orders}">Orders</a>
+                    <a th:href="@{/logout}">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<h1>Cart</h1>
+
+<div class="cart-container">
+    <div class="product-list">
+        <h2>Product List</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product, productIndex : ${cart.products}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td>
+                    <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image"
+                         style="max-with:80px; max-height:80px;"/>
+                </td>
+                <td>
+                    <form th:action="@{/shopping/user/removeFromCart/{productIndex}(productIndex=${productIndex.index})}"
+                          method="post">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="total-price">
+        <h2>Total Price: <span th:text="${totalPrice}"></span>$</h2>
+
+    </div>
+</div>
+
+</body>
+
+</html>
