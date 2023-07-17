@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -115,7 +115,14 @@ public class User {
     }
 
     public String getFullName(String firstName, String lastName) {
-        String fullName;
-        return fullName = firstName + " " + lastName;
+        String fullName = firstName + " " + lastName;
+        return fullName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "address=" + address +
+                '}';
     }
 }

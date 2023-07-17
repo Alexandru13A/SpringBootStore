@@ -13,7 +13,7 @@
         <ul>
             <li class="left-group">
                 <a th:href="@{/shopping/dashboard}">Home</a>
-                <a th:href="@{/shopping/admin/view/products}">Products</a>
+                <a th:href="@{/shopping/user/view/products}">Products</a>
                 <a th:href="@{/shopping/contact}">Contact</a>
             </li>
             <li class="right-group dropdown">
@@ -63,8 +63,11 @@
     </div>
     <div class="total-price">
         <h2>Total Price: <span th:text="${totalPrice}"></span>$</h2>
-
     </div>
+    <form th:action="@{/shopping/preview/order}"
+          method="get">
+        <button type="submit">Place Order</button>
+    </form>
 </div>
 
 </body>

@@ -38,10 +38,10 @@ public class AdminController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/admin/user")
+    @GetMapping("/admin/users")
     public String getAllUsers(Model model) {
-        model.addAttribute("user", userService.getAllUsers());
-        return "admin/home/user";
+        model.addAttribute("users", userService.getAllUsers());
+        return "admin/home/users";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -57,7 +57,7 @@ public class AdminController {
             return "admin/functions/create_address";
         }
         model.addAttribute("address", address);
-        model.addAttribute("user", user);
+        model.addAttribute("users", user);
         model.addAttribute("userId", user.getUserId());
 
         return "admin/functions/modify_user_address";
@@ -82,7 +82,7 @@ public class AdminController {
         user.setAddress(address);
         userService.createUser(user);
         model.addAttribute("address", address);
-        model.addAttribute("user", user);
+        model.addAttribute("users", user);
         model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
         model.addAttribute("email", user.getEmail());
         model.addAttribute("role", user.getRole());
@@ -96,7 +96,7 @@ public class AdminController {
     public String editUser(@PathVariable Long id, Model model) {
         User user = userService.getUserById(id);
         user.setUserId(id);
-        model.addAttribute("user", user);
+        model.addAttribute("users", user);
         model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
         model.addAttribute("email", user.getEmail());
         model.addAttribute("role", user.getRole());
@@ -153,7 +153,7 @@ public class AdminController {
         user.setRole(newRole);
         userService.createUser(user);
 
-        model.addAttribute("user", user);
+        model.addAttribute("users", user);
         model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
         model.addAttribute("email", user.getEmail());
         model.addAttribute("role", user.getRole());
@@ -181,7 +181,7 @@ public class AdminController {
         user.setFirstName(newFirstName);
         userService.createUser(user);
 
-        model.addAttribute("user", user);
+        model.addAttribute("users", user);
         model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
         model.addAttribute("email", user.getEmail());
         model.addAttribute("role", user.getRole());
@@ -209,7 +209,7 @@ public class AdminController {
         user.setLastName(newLastName);
         userService.createUser(user);
 
-        model.addAttribute("user", user);
+        model.addAttribute("users", user);
         model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
         model.addAttribute("email", user.getEmail());
         model.addAttribute("role", user.getRole());
@@ -237,7 +237,7 @@ public class AdminController {
         user.setEmail(email);
         userService.createUser(user);
 
-        model.addAttribute("user", user);
+        model.addAttribute("users", user);
         model.addAttribute("username", user.getFullName(user.getFirstName(), user.getLastName()));
         model.addAttribute("email", user.getEmail());
         model.addAttribute("role", user.getRole());
@@ -258,34 +258,34 @@ public class AdminController {
         Address address = user.getAddress();
         model.addAttribute("address", address);
 
-        return "user/account/modify_address";
+        return "users/functions/modify_address";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return "redirect:/shopping/admin/user";
+        return "redirect:/shopping/admin/users";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin/createUser")
     public String createUser(Model model) {
         UserDTO userDTO = new UserDTO();
-        model.addAttribute("user", userDTO);
+        model.addAttribute("users", userDTO);
         return "admin/functions/create_user";
     }
 
 
     @PostMapping("/admin/save")
-    public String saveUser(@Valid @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, Model model) {
+    public String saveUser(@Valid @ModelAttribute("users") UserDTO userDTO, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "admin/functions/create_user";
         }
         if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
             bindingResult.rejectValue("confirmPassword", "userDTO.confirmPassword", "Password and Confirm Password must match");
-            model.addAttribute("user", userDTO);
+            model.addAttribute("users", userDTO);
             return "admin/functions/create_user";
         }
         User user = new User();
@@ -294,9 +294,9 @@ public class AdminController {
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userService.createUser(user);
-        model.addAttribute("user", user);
+        model.addAttribute("users", user);
 
-        return "redirect:/shopping/admin/user";
+        return "redirect:/shopping/admin/users";
     }
 
 

@@ -41,6 +41,9 @@ public class CartService {
             session.setAttribute("cart", cart);
         } else {
             Hibernate.initialize(cart.getProducts());
+            if (cart.getProducts() != null && !cart.getProducts().isEmpty()) {
+                Hibernate.initialize(cart.getProducts().get(0).getCarts());
+            }
         }
         return cart;
     }

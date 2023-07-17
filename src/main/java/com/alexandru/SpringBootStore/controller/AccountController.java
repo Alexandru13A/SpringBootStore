@@ -40,7 +40,7 @@ public class AccountController {
         }
         if (!userDTO.getPassword().equals(userDTO.getConfirmPassword())) {
             bindingResult.rejectValue("confirmPassword", "userDTO.confirmPassword", "Password and Confirm Password must match");
-            model.addAttribute("user", userDTO);
+            model.addAttribute("users", userDTO);
             return "authentication/register_form";
         }
 
@@ -63,7 +63,7 @@ public class AccountController {
 
     @GetMapping("/logout")
     public String logout() {
-        return "user/home/dashboard";
+        return "users/home/dashboard";
     }
 
 

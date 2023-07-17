@@ -6,9 +6,6 @@ import com.alexandru.SpringBootStore.service.ProductService;
 import com.alexandru.SpringBootStore.service.UserService;
 import com.alexandru.SpringBootStore.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -30,13 +27,14 @@ public class ProductController {
     private final ProductService productService;
 
 
-    public ProductController(UserService userService, ProductService productService) {
+    public ProductController(ImageUtil imageUtil, UserService userService, ProductService productService) {
+        this.imageUtil = imageUtil;
         this.userService = userService;
         this.productService = productService;
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("/products")
+    @GetMapping("/admin/products")
     public String getAllProducts(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
@@ -46,16 +44,7 @@ public class ProductController {
 
     @GetMapping("/product/image/{id}")
     public ResponseEntity<byte[]> getProductImage(@PathVariable Long id) {
-        Product product = productService.getProductById(id);
-        byte[] imageBytes = product.getProductImage();
-
-        HttpHeaders headers = new HttpHeaders();
-        if (headers.equals(MediaType.IMAGE_JPEG)) {
-            headers.setContentType(MediaType.IMAGE_JPEG); // Sau MediaType.IMAGE_PNG, în funcție de tipul imaginii
-        } else {
-            headers.setContentType(MediaType.IMAGE_PNG);
-        }
-        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+        return imageUtil.getProductImage(id);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -116,7 +105,7 @@ public class ProductController {
         model.addAttribute("longDescription", product.getLongDescription());
         model.addAttribute("price", product.getPrice());
         model.addAttribute("category", product.getCategory());
-
+        model.addAttribute("productImage", product.getProductImage());
 
         return "admin/functions/modify_product";
     }
@@ -169,7 +158,7 @@ public class ProductController {
     @GetMapping("/user/view/products")
     public String userViewProducts(Model model) {
         model.addAttribute("products", productService.getAllProducts());
-        return "user/home/user_view_products";
+        return "users/home/user_view_products";
     }
 
     @GetMapping("/user/view/product/{productId}")
@@ -177,7 +166,7 @@ public class ProductController {
         Product product = productService.getProductById(id);
         product.setProductId(id);
         model.addAttribute("product", product);
-        return "user/home/user_view_product";
+        return "users/home/user_view_product";
     }
 
 

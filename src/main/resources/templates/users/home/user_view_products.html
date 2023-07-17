@@ -21,7 +21,7 @@
                     <a th:href="@{/shopping/user/settings}">Settings</a>
                     <a th:href="@{/shopping/user/cart}">Cart</a>
                     <a th:href="@{/shopping/user/address}">Address</a>
-                    <a th:href="@{/shopping/user/orders}">Orders</a>
+                    <a th:href="@{/shopping/orders}">Orders</a>
                     <a th:href="@{/logout}">Logout</a>
                 </div>
             </li>
@@ -59,7 +59,7 @@
             <div class="product-container">
                 <h3 th:text="${product.name}"></h3>
                 <div class="image-container">
-                    <img th:src="@{'/shopping/admin/product/image/' + ${product.productId}}" alt="Product Image" class="product-image" />
+                    <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image" class="product-image" />
                 </div>
                 <p th:text="${product.shortDescription}"></p>
                 <p th:text="${product.price}"></p>

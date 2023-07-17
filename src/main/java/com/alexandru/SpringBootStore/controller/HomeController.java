@@ -39,7 +39,7 @@ public class HomeController {
                 if (role.equals("ADMIN")) {
                     return "admin/home/admin_dashboard";
                 } else if (role.equals("USER")) {
-                    return "user/home/user_dashboard";
+                    return "users/home/user_dashboard";
                 }
             }
 
@@ -64,7 +64,7 @@ public class HomeController {
 
         }
 
-        return "user/home/user_dashboard";
+        return "users/home/user_dashboard";
     }
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin/dashboard")

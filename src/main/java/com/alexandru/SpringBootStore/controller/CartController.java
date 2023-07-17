@@ -66,7 +66,7 @@ public class CartController {
         BigDecimal totalPrice = cartService.calculateTotalPrice(cart);
         model.addAttribute("cart", cart);
         model.addAttribute("totalPrice", totalPrice);
-        return "user/account/cart";
+        return "users/functions/cart";
     }
 
     @PostMapping("/user/addToCart/{productId}")
@@ -88,7 +88,7 @@ public class CartController {
         cartService.updateCartInSession(cart);
         BigDecimal totalPrice = cartService.calculateTotalPrice(cart);
         cartService.updateTotalPriceInSession(totalPrice);
-        return "redirect:/shopping/user/cart";
+        return "redirect:/shopping/users/cart";
     }
 
 

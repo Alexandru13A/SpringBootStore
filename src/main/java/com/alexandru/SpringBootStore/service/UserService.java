@@ -78,5 +78,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id).get();
     }
 
+    public User getUserByEmailWithOrders(String email) {
+        return userRepository.findByEmailWithOrders(email);
+    }
 
 }

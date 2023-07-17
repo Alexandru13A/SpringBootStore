@@ -1,6 +1,5 @@
 package com.alexandru.SpringBootStore.dto;
 
-import javax.persistence.Lob;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 

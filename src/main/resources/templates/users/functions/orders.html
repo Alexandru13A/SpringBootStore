@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/orders.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li class="left-group">
+                <a th:href="@{/shopping/dashboard}">Home</a>
+                <a th:href="@{/shopping/user/view/products}">Products</a>
+                <a th:href="@{/shopping/contact}">Contact</a>
+            </li>
+            <li class="right-group dropdown">
+                <a href="#">Account</a>
+                <div class="dropdown-menu">
+                    <a th:href="@{/shopping/user/settings}">Settings</a>
+                    <a th:href="@{/shopping/user/cart}">Cart</a>
+                    <a th:href="@{/shopping/user/address}">Address</a>
+                    <a th:href="@{/shopping/orders}">Orders</a>
+                    <a th:href="@{/logout}">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<h1>Orders</h1>
+
+<div th:if="${not #lists.isEmpty(orders)}">
+    <ul class="order-list">
+        <li th:each="order : ${orders}">
+            <div class="order-item">
+                <p><strong>User:</strong> <span th:text="${fullName}"></span></p>
+                <p><strong>Address:</strong> <span th:text="${fullAddress}"></span></p>
+                <p><strong>Products:</strong></p>
+                <ul>
+                    <li th:each="product : ${order.cart.products}">
+                     <span> <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image"
+                                 style="max-width: 50px; max-height: 50px;"/></span>   <span th:text="${product.name}"></span> - <span th:text="${product.price}"></span> $
+                    </li>
+                </ul>
+                <div class="total-price">
+                    <h3>Total Price: <span th:text="${totalPrice}"></span>$</h3>
+                </div>
+                <form th:action="@{/shopping/order/delete/{id}(id=${order.orderId})}" method="post">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+<div th:if="${#lists.isEmpty(orders)}">
+    <p>No orders found.</p>
+</div>
+</body>
+</html>

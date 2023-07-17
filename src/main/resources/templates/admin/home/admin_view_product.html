@@ -39,9 +39,9 @@
      style="max-width: 400px; max-height: 400px;"/>
 
 <h4><span th:text="${product.shortDescription}"></span></h4>
-<p>Category: <span th:text="${product.category}"/></p>
-<p th:text="${product.longDescription}"/>
-<p>$ <span th:text="${product.price}"/></p>
+<p>Category: <span th:text="${product.category}"></span></p>
+<p th:text="${product.longDescription}"></p>
+<p>$ <span th:text="${product.price}"></span></p>
 
 
 <form th:action="@{/shopping/admin/addToCart/{productId}(productId=${product.productId})}" method="post">

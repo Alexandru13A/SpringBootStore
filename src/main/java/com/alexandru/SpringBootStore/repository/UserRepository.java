@@ -30,4 +30,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("UPDATE User u SET u.lastName =: lastName WHERE u.email =: email")
     int updateUserLastName(String email, String lastName);
+
+    @Query("SELECT u FROM User u LEFT JOIN FETCH u.orders WHERE u.email = :email")
+    User findByEmailWithOrders(@Param("email") String email);
 }

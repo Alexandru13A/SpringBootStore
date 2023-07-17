@@ -53,7 +53,7 @@
                          style="max-with:80px; max-height:80px;"/>
                 </td>
                 <td>
-                    <form th:action="@{/shopping/removeFromCart/{productIndex}(productIndex=${productIndex.index})}"
+                    <form th:action="@{/shopping/admin/removeFromCart/{productIndex}(productIndex=${productIndex.index})}"
                           method="post">
                         <button type="submit">Remove</button>
                     </form>
@@ -64,8 +64,11 @@
     </div>
     <div class="total-price">
         <h2>Total Price: <span th:text="${totalPrice}"></span>$</h2>
-
     </div>
+    <form th:action="@{/shopping/preview/order}"
+          method="get">
+        <button type="submit">Place Order</button>
+    </form>
 </div>
 
 </body>
