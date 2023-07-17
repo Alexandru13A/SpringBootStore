@@ -13,25 +13,17 @@ import java.math.BigDecimal;
 public class CartService {
 
 
-    private HttpSession session;
-    private CartRepository cartRepository;
-    private ProductService productService;
-    private UserService userService;
+    private final HttpSession session;
+    private final CartRepository cartRepository;
 
-    public CartService(HttpSession session, CartRepository cartRepository, ProductService productService, UserService userService) {
+    public CartService(HttpSession session, CartRepository cartRepository) {
         this.session = session;
         this.cartRepository = cartRepository;
-        this.productService = productService;
-        this.userService = userService;
     }
 
 
     public void saveCart(Cart cart) {
         cartRepository.save(cart);
-    }
-
-    public Cart findById(Long id) {
-        return cartRepository.findById(id).get();
     }
 
     public Cart getCartFromSession() {

@@ -4,8 +4,6 @@ import com.alexandru.SpringBootStore.model.Cart;
 import com.alexandru.SpringBootStore.model.Product;
 import com.alexandru.SpringBootStore.service.CartService;
 import com.alexandru.SpringBootStore.service.ProductService;
-import com.alexandru.SpringBootStore.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,15 +17,12 @@ import java.math.BigDecimal;
 public class CartController {
 
 
-    private CartService cartService;
-    @Autowired
-    private ProductService productService;
-    private UserService userService;
+    private final CartService cartService;
+    private final ProductService productService;
 
-    public CartController(CartService cartService, ProductService productService, UserService userService) {
+    public CartController(CartService cartService, ProductService productService) {
         this.cartService = cartService;
         this.productService = productService;
-        this.userService = userService;
     }
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin/cart")

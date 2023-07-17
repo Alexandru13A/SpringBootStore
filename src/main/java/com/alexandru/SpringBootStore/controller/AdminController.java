@@ -5,7 +5,6 @@ import com.alexandru.SpringBootStore.dto.UserDTO;
 import com.alexandru.SpringBootStore.model.Address;
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,19 +20,14 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/shopping")
 public class AdminController {
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
     private final UserService userService;
-    private final OrderService orderService;
-    private final ProductService productService;
     private final AddressService addressService;
 
 
-    public AdminController(BCryptPasswordEncoder passwordEncoder, UserService userService, OrderService orderService, ProductService productService, AddressService addressService) {
+    public AdminController(BCryptPasswordEncoder passwordEncoder, UserService userService, AddressService addressService) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
-        this.orderService = orderService;
-        this.productService = productService;
         this.addressService = addressService;
     }
 
@@ -148,7 +142,6 @@ public class AdminController {
             return "admin/functions/modify_user";
         }
 
-        // Actualizează numele de familie al utilizatorului
         user.setUserId(id);
         user.setRole(newRole);
         userService.createUser(user);
@@ -176,7 +169,6 @@ public class AdminController {
             return "admin/functions/modify_user";
         }
 
-        // Actualizează numele de familie al utilizatorului
         user.setUserId(id);
         user.setFirstName(newFirstName);
         userService.createUser(user);
@@ -204,7 +196,6 @@ public class AdminController {
             return "admin/functions/modify_user";
         }
 
-        // Actualizează numele de familie al utilizatorului
         user.setUserId(id);
         user.setLastName(newLastName);
         userService.createUser(user);
@@ -232,7 +223,6 @@ public class AdminController {
             return "admin/functions/modify_user";
         }
 
-        // Actualizează numele de familie al utilizatorului
         user.setUserId(id);
         user.setEmail(email);
         userService.createUser(user);

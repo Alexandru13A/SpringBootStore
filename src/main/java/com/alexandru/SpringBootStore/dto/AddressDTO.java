@@ -24,8 +24,6 @@ public class AddressDTO {
     @Size(min = 4)
     private String country;
 
-    private String getAllAddress;
-
 
     public long getAddressId() {
         return addressId;

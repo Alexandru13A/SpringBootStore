@@ -13,34 +13,14 @@ import org.springframework.ui.Model;
 @Service
 public class AddressService {
 
-    private UserService userService;
-    private AddressRepository addressRepository;
+    private final UserService userService;
+    private final AddressRepository addressRepository;
 
     public AddressService(UserService userService, AddressRepository addressRepository) {
         this.userService = userService;
         this.addressRepository = addressRepository;
     }
 
-
-    public int updateFirstAddress(String address, long id) {
-        return addressRepository.updateFirstAddress(address, id);
-    }
-
-    public int updateSecondAddress(Long id, String address) {
-        return addressRepository.updateSecondAddress(id, address);
-    }
-
-    public int updateCity(long id, String city) {
-        return addressRepository.updateCity(id, city);
-    }
-
-    public int updateCountry(long id, String country) {
-        return addressRepository.updateCountry(id, country);
-    }
-
-    public void deleteAddress(long id) {
-        addressRepository.deleteById(id);
-    }
 
     public void saveAddress(Address address) {
         addressRepository.save(address);

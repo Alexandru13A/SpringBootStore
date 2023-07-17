@@ -25,10 +25,10 @@ import java.util.List;
 @RequestMapping("/shopping")
 public class OrderController {
 
-    private AddressService addressService;
-    private OrderService orderService;
-    private UserService userService;
-    private CartService cartService;
+    private final AddressService addressService;
+    private final OrderService orderService;
+    private final UserService userService;
+    private final CartService cartService;
 
     public OrderController(AddressService addressService, OrderService orderService, UserService userService, CartService cartService) {
         this.addressService = addressService;
@@ -45,10 +45,8 @@ public class OrderController {
         User user = userService.getUserByEmailWithOrders(userDetails.getUsername());
         Address address = user.getAddress();
 
-        // Obține toate comenzile utilizatorului
         List<Order> orders = user.getOrders();
         BigDecimal totalPrice = null;
-        // Calculează prețul total pentru fiecare comandă
         for (Order o : orders) {
             totalPrice = cartService.calculateTotalPrice(o.getCart());
         }
@@ -98,7 +96,7 @@ public class OrderController {
     }
 
     @GetMapping("/preview/order")
-    public String previewOrder(Model model, HttpSession session, BigDecimal totalPrice) {
+    public String previewOrder(Model model, HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.getUserByEmail(userDetails.getUsername());
@@ -111,7 +109,7 @@ public class OrderController {
 
         String fullAddress = "Address 1: " + address.getAddress1() + ", City: " + address.getCity() + ", Country: " + address.getCountry();
         String fullName = user.getFullName(user.getFirstName(), user.getLastName());
-        totalPrice = cartService.calculateTotalPrice(cart);
+        BigDecimal totalPrice = cartService.calculateTotalPrice(cart);
 
         model.addAttribute("user", user);
         model.addAttribute("cart", cart);

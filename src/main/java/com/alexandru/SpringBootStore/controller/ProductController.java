@@ -3,7 +3,6 @@ package com.alexandru.SpringBootStore.controller;
 import com.alexandru.SpringBootStore.dto.ProductDTO;
 import com.alexandru.SpringBootStore.model.Product;
 import com.alexandru.SpringBootStore.service.ProductService;
-import com.alexandru.SpringBootStore.service.UserService;
 import com.alexandru.SpringBootStore.utils.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +21,12 @@ import java.util.List;
 @RequestMapping("/shopping")
 public class ProductController {
     @Autowired
-    private ImageUtil imageUtil;
-    private final UserService userService;
+    private final ImageUtil imageUtil;
     private final ProductService productService;
 
 
-    public ProductController(ImageUtil imageUtil, UserService userService, ProductService productService) {
+    public ProductController(ImageUtil imageUtil, ProductService productService) {
         this.imageUtil = imageUtil;
-        this.userService = userService;
         this.productService = productService;
     }
 

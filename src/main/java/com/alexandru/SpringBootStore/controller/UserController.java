@@ -31,7 +31,6 @@ public class UserController {
         this.addressService = addressService;
     }
 
-    //ACCOUNT SETTINGS
     @GetMapping("/settings")
     public String accountSettings(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -60,7 +59,6 @@ public class UserController {
         }
 
 
-        // Actualizează numele de familie al utilizatorului
         user.setFirstName(newFirstName);
         userService.createUser(user);
 
@@ -73,7 +71,6 @@ public class UserController {
         return "users/functions/account_settings";
     }
 
-    //Change last name
     @PostMapping("/updateLastName")
     public String updateLastName(@RequestParam("newLastName") String newLastName, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -86,7 +83,6 @@ public class UserController {
             return "users/functions/account_settings";
         }
 
-        // Actualizează numele de familie al utilizatorului
         user.setLastName(newLastName);
         userService.createUser(user);
 
@@ -99,10 +95,7 @@ public class UserController {
         return "users/functions/account_settings";
     }
 
-    //Change email
-    //Change password
 
-    //Address add/change
     @GetMapping("/address")
     public String addAddressToUser(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -189,7 +182,6 @@ public class UserController {
     }
 
 
-    //ORDERS
 
 
 }
