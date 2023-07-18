@@ -36,6 +36,8 @@
     <ul class="order-list">
         <li th:each="order : ${orders}">
             <div class="order-item">
+
+                <p><strong>Order ID:</strong> <span th:text="${order.orderId}"></span></p>
                 <p><strong>User:</strong> <span th:text="${fullName}"></span></p>
                 <p><strong>Address:</strong> <span th:text="${fullAddress}"></span></p>
                 <p><strong>Products:</strong></p>
@@ -46,7 +48,7 @@
                     </li>
                 </ul>
                 <div class="total-price">
-                    <h3>Total Price: <span th:text="${totalPrice}"></span>$</h3>
+                    <h3>Total Price: <span th:text="${order.cart.getCartTotalPrice}"></span>$</h3>
                 </div>
                 <form th:action="@{/shopping/order/delete/{id}(id=${order.orderId})}" method="post">
                     <button type="submit" class="delete-button">Delete</button>

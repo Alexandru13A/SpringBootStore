@@ -83,4 +83,9 @@ public class HomeController {
         return "admin/home/admin_dashboard";
     }
 
+    @GetMapping("/contact")
+    public String contactPage(){
+        return "common/contact";
+    }
+
 }

@@ -46,20 +46,15 @@ public class OrderController {
         Address address = user.getAddress();
 
         List<Order> orders = user.getOrders();
-        BigDecimal totalPrice = null;
-        for (Order o : orders) {
-            totalPrice = cartService.calculateTotalPrice(o.getCart());
-        }
 
         String fullAddress = "Address 1: " + address.getAddress1() + ", City: " + address.getCity() + ", Country: " + address.getCountry();
         String fullName = user.getFullName(user.getFirstName(), user.getLastName());
         model.addAttribute("orders", orders);
         model.addAttribute("fullAddress", fullAddress);
         model.addAttribute("fullName", fullName);
-        model.addAttribute("totalPrice", totalPrice);
-        if(user.getRole().equals("ADMIN")) {
+        if (user.getRole().equals("ADMIN")) {
             return "admin/home/orders";
-        }else {
+        } else {
             return "users/functions/orders";
         }
     }
@@ -82,6 +77,7 @@ public class OrderController {
 
         if (cart != null) {
             cart.setUser(user);
+            cart.setCartTotalPrice(cartService.calculateTotalPrice(cart));
             cartService.saveCart(cart);
         }
 

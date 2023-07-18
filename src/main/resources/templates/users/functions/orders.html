@@ -44,7 +44,7 @@
                     </li>
                 </ul>
                 <div class="total-price">
-                    <h3>Total Price: <span th:text="${totalPrice}"></span>$</h3>
+                    <h3>Total Price: <span th:text="${order.cart.getCartTotalPrice}"></span>$</h3>
                 </div>
                 <form th:action="@{/shopping/order/delete/{id}(id=${order.orderId})}" method="post">
                     <button type="submit" class="delete-button">Delete</button>

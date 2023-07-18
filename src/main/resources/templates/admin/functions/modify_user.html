@@ -26,12 +26,12 @@
 <p>Country: <span th:if="${address == null}">No address</span><span th:unless="${address == null}"
                                                                     th:text="${address.country}"></span></p>
 
-<a th:href="@{/shopping/admin/updateAddress/{id}(id=${user.userId})}">Modify address</a>
+<a th:href="@{/shopping/admin/updateAddress/{id}(id=${userId})}">Modify address</a>
 
 <hr class="line"/>
 
 <div style="margin-top: 35px;" class="form-container">
-    <form th:action="@{/shopping/admin/updateFirstName/{id}(id=${user.userId})}" th:method="POST" th:object="${user}">
+    <form th:action="@{/shopping/admin/updateFirstName/{id}(id=${userId})}" th:method="POST" th:object="${user}">
         <label for="newFirstName">First Name:</label>
         <input type="text" id="newFirstName" name="newFirstName" th:value="${firstName}"
                required
@@ -39,7 +39,7 @@
         <button type="submit">Save</button>
     </form>
 
-    <form th:action="@{/shopping/admin/updateLastName/{id}(id=${user.userId})}" th:method="post" th:object="${user}">
+    <form th:action="@{/shopping/admin/updateLastName/{id}(id=${userId})}" th:method="post" th:object="${user}">
         <label for="lastName">Last Name:</label>
         <input type="text" id="lastName" name="newLastName" th:value="${lastName}"
                required
@@ -47,7 +47,7 @@
         <button type="submit">Save</button>
     </form>
 
-    <form th:action="@{/shopping/admin/updateEmail/{id}(id=${user.userId})}" method="post" th:object="${user}">
+    <form th:action="@{/shopping/admin/updateEmail/{id}(id=${userId})}" method="post" th:object="${user}">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" th:value="${email}"
                required
@@ -55,7 +55,7 @@
 
         <button type="submit">Save</button>
     </form>
-    <form th:action="@{/shopping/admin/updateRole/{id}(id=${user.userId})}" method="post" th:object="${user}">
+    <form th:action="@{/shopping/admin/updateRole/{id}(id=${userId})}" method="post" th:object="${user}">
         <label for="role">Role:</label>
         <input type="text" id="role" name="newRole" th:value="${role}"
                required

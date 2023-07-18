@@ -62,7 +62,7 @@
                     <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image" class="product-image" />
                 </div>
                 <p th:text="${product.shortDescription}"></p>
-                <p th:text="${product.price}"></p>
+                <p th:text="'$' + ${product.price}"></p>
                 <form th:action="@{/shopping/user/addToCart/{productId}(productId=${product.productId})}" method="post">
                     <button type="submit">Add to Cart</button>
                 </form>

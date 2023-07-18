@@ -1,11 +1,21 @@
 package com.alexandru.SpringBootStore.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "cart")
 public class Cart {
@@ -31,6 +41,9 @@ public class Cart {
     )
     private List<Product> products = new ArrayList<>();
 
+    @Column(name = "cart_total_price")
+    private BigDecimal cartTotalPrice;
+
 
     public void addProduct(Product product) {
         products.add(product);
@@ -45,38 +58,4 @@ public class Cart {
         }
     }
 
-
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-
-    public long getCartId() {
-        return cartId;
-    }
-
-    public void setCartId(long cartId) {
-        this.cartId = cartId;
-    }
 }

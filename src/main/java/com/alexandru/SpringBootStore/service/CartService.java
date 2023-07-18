@@ -54,6 +54,7 @@ public class CartService {
         for (Product product : cart.getProducts()) {
             totalPrice = totalPrice.add(product.getPrice());
         }
+
         return totalPrice;
     }
 
