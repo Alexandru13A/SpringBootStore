@@ -39,11 +39,23 @@ public class Product {
     @Column(name = "product_category")
     private String category;
 
+    @Column(name = "product_brand")
+    private String brand;
+
+    @Column(name = "product_type")
+    private String type;
+
+    @Column(name = "product_gender")
+    private String gender;
+
+    @Column(name = "product_size")
+    private double size;
 
     @Column(name = "product_image")
     private byte[] productImage;
 
-    @ManyToMany(mappedBy = "products")
-    private List<Cart> carts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product")
+    private List<CartItem> cartItems = new ArrayList<>();
 
 }

@@ -12,7 +12,7 @@
         <ul>
             <li class="left-group">
                 <a th:href="@{/shopping/dashboard}">Home</a>
-                <a th:href="@{/shopping/user/view/products}">Products</a>
+                <a th:href="@{/shopping/view/products}">Products</a>
                 <a th:href="@{/shopping/contact}">Contact</a>
             </li>
             <li class="right-group dropdown">
@@ -31,43 +31,56 @@
 <h1>Products</h1>
 
 <!-- Bara de căutare -->
-<form action="/shopping/admin/view/products" method="GET">
+<form action="/shopping/view/products" method="GET">
     <input type="text" name="searchTerm" placeholder="Search">
     <button type="submit">Search</button>
 </form>
 
 <!-- Filtrare și opțiuni de sortare -->
 <div>
-    <label>Filter by:</label>
-    <select name="category">
-        <option value="">All</option>
-        <option value="shoes">Shoes</option>
-        <option value="clothing">Clothing</option>
-    </select>
-    <label>Sort by:</label>
-    <select name="sort">
-        <option value="name">Name</option>
-        <option value="price">Price</option>
-    </select>
-    <button type="submit">Apply</button>
+    <form th:action="@{/shopping/view/products}" method="GET">
+        <label>Filter by:</label>
+        <select name="category">
+            <option value="">All</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Clothing">Clothing</option>
+        </select>
+        <label>Sort by:</label>
+        <select name="sort">
+            <option value="">None</option>
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+        </select>
+        <button type="submit">Apply</button>
+    </form>
 </div>
 
 <!-- Grid view pentru produse -->
-<div th:each="product : ${products}" class="product-card">
-    <div class="product-link">
-        <a th:href="@{/shopping/user/view/product/{productId}(productId=${product.productId})}">
-            <div class="product-container">
-                <h3 th:text="${product.name}"></h3>
-                <div class="image-container">
-                    <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image" class="product-image" />
-                </div>
-                <p th:text="${product.shortDescription}"></p>
-                <p th:text="'$' + ${product.price}"></p>
-                <form th:action="@{/shopping/user/addToCart/{productId}(productId=${product.productId})}" method="post">
-                    <button type="submit">Add to Cart</button>
-                </form>
+<div class="product-grid">
+    <!-- Loop through each row of products -->
+    <div th:each="row : ${products}" class="product-row">
+        <!-- Loop through products in the current row -->
+        <div th:each="product : ${row}" class="product-card">
+            <div class="product-link">
+                <a th:href="@{/shopping/view/product/{productId}(productId=${product.productId})}">
+                    <div class="product-container">
+                        <h3 th:text="${product.name}"></h3>
+                        <h4 th:text="${product.brand}"></h4>
+                        <h4 th:text="'For:' +  ${product.gender}"></h4>
+                        <div class="image-container">
+                            <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image"
+                                 class="product-image"/>
+                        </div>
+                        <p th:text="${product.shortDescription}"></p>
+                        <p th:text="'$' + ${product.price}"></p>
+                        <form th:action="@{/shopping/view/product/{productId}(productId=${product.productId})}"
+                              method="get">
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                    </div>
+                </a>
             </div>
-        </a>
+        </div>
     </div>
 </div>
 

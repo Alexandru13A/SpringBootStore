@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/view_products.css}">
-
 </head>
 <body>
 <header>
     <nav>
         <ul>
             <li class="left-group">
-                <a th:href="@{/shopping/admin/dashboard}">Home</a>
-                <a th:href="@{/shopping/user/view/products}">Products</a>
+                <a th:href="@{/shopping/dashboard}">Home</a>
+                <a th:href="@{/shopping/view/products}">Products</a>
                 <a th:href="@{/shopping/contact}">Contact</a>
             </li>
             <li class="right-group dropdown">
@@ -29,20 +28,29 @@
     </nav>
 </header>
 
-
-<h1><span th:text="${product.name}"/></h1>
-
+<h1><span th:text="${product.name}"></span></h1>
+<h2><span th:text="${product.brand}"></span></h2>
 
 <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image"
      style="max-width: 400px; max-height: 400px;"/>
 
 <h4><span th:text="${product.shortDescription}"></span></h4>
-<p>Category: <span th:text="${product.category}"/></p>
-<p th:text="${product.longDescription}"/>
-<p>$ <span th:text="${product.price}"/></p>
-
+<p>Category: <span th:text="${product.category}"></span></p>
+<p>Type: <span th:text="${product.type}"></span></p>
+<p>Gender: <span th:text="${product.gender}"></span></p>
+<p th:text="${product.longDescription}"></p>
+<p>$ <span th:text="${product.price}"></span></p>
 
 <form th:action="@{/shopping/user/addToCart/{productId}(productId=${product.productId})}" method="post">
+    <label for="size">Size:</label>
+    <select id="size" name="size">
+        <option th:if="${product.category == 'Shoes'}" th:each="size : ${shoeSizes}" th:value="${size}" th:text="${size}"></option>
+        <option th:if="${product.category == 'Clothes'}" th:each="size : ${clothesSizes}" th:value="${size}" th:text="${size}"></option>
+    </select>
+    <br>
+    <label for="quantity">Quantity:</label>
+    <input id="quantity" type="number" name="quantity" min="1" value="1">
+    <br>
     <button type="submit">Add to Cart</button>
 </form>
 

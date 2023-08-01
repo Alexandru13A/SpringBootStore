@@ -40,11 +40,12 @@ public class User {
 
     @Column(name = "user_role")
     private String role = "USER";
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressId")
     private Address address;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Order> orders = new ArrayList<>();
 
 

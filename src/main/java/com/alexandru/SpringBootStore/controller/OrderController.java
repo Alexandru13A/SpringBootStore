@@ -4,10 +4,7 @@ package com.alexandru.SpringBootStore.controller;
 import com.alexandru.SpringBootStore.dto.AddressDTO;
 import com.alexandru.SpringBootStore.dto.OrderDTO;
 import com.alexandru.SpringBootStore.model.*;
-import com.alexandru.SpringBootStore.service.AddressService;
-import com.alexandru.SpringBootStore.service.CartService;
-import com.alexandru.SpringBootStore.service.OrderService;
-import com.alexandru.SpringBootStore.service.UserService;
+import com.alexandru.SpringBootStore.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,12 +22,14 @@ import java.util.List;
 @RequestMapping("/shopping")
 public class OrderController {
 
+    private final CartItemService cartItemService;
     private final AddressService addressService;
     private final OrderService orderService;
     private final UserService userService;
     private final CartService cartService;
 
-    public OrderController(AddressService addressService, OrderService orderService, UserService userService, CartService cartService) {
+    public OrderController(CartItemService cartItemService, AddressService addressService, OrderService orderService, UserService userService, CartService cartService) {
+        this.cartItemService = cartItemService;
         this.addressService = addressService;
         this.orderService = orderService;
         this.userService = userService;
@@ -42,7 +41,7 @@ public class OrderController {
     public String getOrders(Model model, @ModelAttribute("order") Order order) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = userService.getUserByEmailWithOrders(userDetails.getUsername());
+        User user = userService.getUserForOrders(userDetails.getUsername());
         Address address = user.getAddress();
 
         List<Order> orders = user.getOrders();
@@ -55,7 +54,7 @@ public class OrderController {
         if (user.getRole().equals("ADMIN")) {
             return "admin/home/orders";
         } else {
-            return "users/functions/orders";
+            return "users/home/orders";
         }
     }
 
@@ -74,11 +73,15 @@ public class OrderController {
         User user = userService.getUserByEmail(userDetails.getUsername());
         Cart cart = cartService.getCartFromSession();
 
-
         if (cart != null) {
             cart.setUser(user);
             cart.setCartTotalPrice(cartService.calculateTotalPrice(cart));
             cartService.saveCart(cart);
+        }
+
+        List<CartItem> cartItems = cart.getCartItems();
+        for (CartItem cartItem : cartItems) {
+            cartItemService.saveCartItem(cartItem);
         }
 
         Order order = new Order();

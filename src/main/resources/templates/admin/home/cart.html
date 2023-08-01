@@ -13,7 +13,7 @@
         <ul>
             <li class="left-group">
                 <a th:href="@{/shopping/dashboard}">Home</a>
-                <a th:href="@{/shopping/admin/view/products}">Products</a>
+                <a th:href="@{/shopping/view/products}">Products</a>
                 <a th:href="@{/shopping/contact}">Contact</a>
             </li>
             <li class="right-group dropdown">
@@ -41,20 +41,23 @@
             <tr>
                 <th>Name</th>
                 <th>Price</th>
+                <th>Size</th>
+                <th>quantity</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product, productIndex : ${cart.products}">
-                <td th:text="${product.name}"></td>
-                <td th:text="${product.price}"></td>
+            <tr th:each="item , itemStat : ${cart.cartItems}">
+                <td th:text="${item.product.name}"></td>
+                <td th:text="${item.product.price}"></td>
+                <td th:text="${item.size}"></td>
+                <td th:text="${item.quantity}"></td>
                 <td>
-                    <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image"
+                    <img th:src="@{'/shopping/product/image/' + ${item.product.productId}}" alt="Product Image"
                          style="max-with:80px; max-height:80px;"/>
                 </td>
                 <td>
-                    <form th:action="@{/shopping/admin/removeFromCart/{productIndex}(productIndex=${productIndex.index})}"
-                          method="post">
+                    <form th:action="@{/shopping/admin/removeFromCart/{productIndex}(productIndex=${itemStat.index})}" method="post">
                         <button type="submit">Remove</button>
                     </form>
                 </td>
@@ -65,11 +68,9 @@
     <div class="total-price">
         <h2>Total Price: <span th:text="${totalPrice}"></span>$</h2>
     </div>
-    <form th:action="@{/shopping/preview/order}"
-          method="get">
+    <form th:action="@{/shopping/preview/order}" method="get">
         <button type="submit">Place Order</button>
     </form>
 </div>
-
 </body>
 </html>

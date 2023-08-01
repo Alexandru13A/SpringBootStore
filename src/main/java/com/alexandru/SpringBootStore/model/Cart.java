@@ -33,28 +33,24 @@ public class Cart {
     @OneToOne(mappedBy = "cart")
     private Order order;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "cart_product",
-            joinColumns = @JoinColumn(name = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<CartItem> cartItems = new ArrayList<>();
 
     @Column(name = "cart_total_price")
     private BigDecimal cartTotalPrice;
 
 
-    public void addProduct(Product product) {
-        products.add(product);
-        product.getCarts().add(this);
+    public void addCartItem(CartItem cartItem) {
+        cartItems.add(cartItem);
+        cartItem.setCart(this);
     }
 
-    public void removeProduct(int index) {
-        if (index >= 0 && index < products.size()) {
-            Product product = products.get(index);
-            products.remove(index);
-            product.getCarts().remove(this);
+    public void removeCartItem(int index) {
+        if (index >= 0 && index < cartItems.size()) {
+            CartItem cartItem = cartItems.get(index);
+            cartItem.setCart(null);
+            cartItems.remove(index);
         }
     }
 

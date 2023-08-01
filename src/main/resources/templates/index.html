@@ -3,40 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
-    <style>
-    body {
-        text-align: center;
-    }
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 
-    h1 {
-        margin-top: 150px;
-        margin-left: auto;
-         margin-right: auto;
-    }
-
-    div {
-        margin-top: 50px;
-    }
-
-    a {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-top: 20px;
-        text-align: center;
-    }
-
-
-    </style>
 </head>
 <body>
 <h1>Welcome To The Shop</h1>
 <div>
-    <a th:href="@{/register}">REGISTER</a>
-    <a th:href="@{/login}">LOGIN</a>
+    <a class="register-button" th:href="@{/register}">Register</a>
+    <a class="login-button" th:href="@{/login}">Login</a>
 </div>
 </body>
 </html>

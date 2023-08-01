@@ -25,10 +25,6 @@ public class ProductService {
         return productRepository.findById(id).get();
     }
 
-    public Product productById(Long id){
-        return productRepository.getProductById(id);
-    }
-
     public void saveProduct(Product product) {
         productRepository.save(product);
     }
@@ -39,6 +35,14 @@ public class ProductService {
 
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
+    }
+
+    public List<Product> searchProductByName(String searchTerm) {
+        return productRepository.findByName(searchTerm);
+    }
+
+    public List<Product> sortByCategoryAndColumn(String category,String sort) {
+        return productRepository.sortByCategoryAndColumn(category,sort);
     }
 
 

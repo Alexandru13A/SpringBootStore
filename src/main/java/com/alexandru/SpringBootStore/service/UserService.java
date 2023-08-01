@@ -1,8 +1,11 @@
 package com.alexandru.SpringBootStore.service;
 
 
+import com.alexandru.SpringBootStore.model.Order;
 import com.alexandru.SpringBootStore.model.User;
 import com.alexandru.SpringBootStore.repository.UserRepository;
+import org.hibernate.Hibernate;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,9 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -41,9 +46,19 @@ public class UserService implements UserDetailsService {
         );
     }
 
+
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    @Transactional
+    public User getUserForOrders(String email){
+        User user = userRepository.findByEmailWithOrders(email);
+        Hibernate.initialize(user.getOrders());
+        Hibernate.initialize(user.getOrders());
+        return user;
+    }
+
 
     private Collection<? extends GrantedAuthority> getAuthorities(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -77,8 +92,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id).get();
     }
 
-    public User getUserByEmailWithOrders(String email) {
-        return userRepository.findByEmailWithOrders(email);
-    }
+
 
 }

@@ -12,7 +12,7 @@
         <ul>
             <li class="left-group">
                 <a th:href="@{/shopping/admin/dashboard}">Home</a>
-                <a th:href="@{/shopping/admin/view/products}">Products</a>
+                <a th:href="@{/shopping/view/products}">Products</a>
                 <a th:href="@{/shopping/contact}">Contact</a>
             </li>
             <li class="right-group dropdown">
@@ -42,9 +42,12 @@
                 <p><strong>Address:</strong> <span th:text="${fullAddress}"></span></p>
                 <p><strong>Products:</strong></p>
                 <ul>
-                    <li th:each="product : ${order.cart.products}">
-                     <span> <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image"
-                                 style="max-width: 50px; max-height: 50px;"/></span>   <span th:text="${product.name}"></span> - <span th:text="${product.price}"></span> $
+                    <li th:each="cartItem : ${order.cart.cartItems}">
+                    <span>
+                        <img th:src="@{'/shopping/product/image/' + ${cartItem.product.productId}}"
+                             alt="Product Image" style="max-width: 50px; max-height: 50px;"/>
+                    </span>
+                        <span th:text="${cartItem.product.name}"></span> - <span th:text="${cartItem.product.price}"></span> $
                     </li>
                 </ul>
                 <div class="total-price">

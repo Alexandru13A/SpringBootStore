@@ -3,62 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <style>
-        form {
-            width: 300px;
-            margin: 0 auto;
-        }
-
-        h1{
-        text-align: center;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        input[type="username"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button{
-        background-color: #4CAF50;
-         color: white;
-         text-align: center;
-         padding: 5px 10px;
-         margin-left: auto;
-         margin-right: auto;
-         margin-top: 10px;
-         display:block;
-         border: none;
-        }
-        a{
-            margin-top: 10px;
-            display: block;
-            text-align: center;
-        }
-
-
-
-
-
-
-
-    </style>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
 <h1>Login</h1>
@@ -69,7 +14,8 @@
                 type="text"
                 class="form-control"
                 placeholder="Email"
-                name="username">
+                name="username"
+                required>
     </label>
     <label>
         <input
@@ -77,7 +23,8 @@
                 type="password"
                 class="form-control"
                 placeholder="Password"
-                name="password">
+                name="password"
+                required>
     </label>
     <button type="submit" value="Log in" class="btn btn-primary" id="Login-submit">Login</button>
     <a th:href="@{/register}">Don't have an account? Register here.</a>

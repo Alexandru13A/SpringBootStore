@@ -1,8 +1,17 @@
 package com.alexandru.SpringBootStore.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDTO {
 
     private long productId;
@@ -23,62 +32,16 @@ public class ProductDTO {
     @NotEmpty
     private String category;
 
+    @NotEmpty
+    private String brand;
+
+    @NotEmpty
+    private String type;
+
+    @NotEmpty
+    private String gender;
+
     private byte[] productImage;
 
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public byte[] getProductImage() {
-        return productImage;
-    }
-
-    public void setProductImage(byte[] productImage) {
-        this.productImage = productImage;
-    }
-
-    public long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(long productId) {
-        this.productId = productId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public String getLongDescription() {
-        return longDescription;
-    }
-
-    public void setLongDescription(String longDescription) {
-        this.longDescription = longDescription;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 }

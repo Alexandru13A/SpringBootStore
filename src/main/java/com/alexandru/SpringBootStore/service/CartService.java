@@ -1,6 +1,7 @@
 package com.alexandru.SpringBootStore.service;
 
 import com.alexandru.SpringBootStore.model.Cart;
+import com.alexandru.SpringBootStore.model.CartItem;
 import com.alexandru.SpringBootStore.model.Product;
 import com.alexandru.SpringBootStore.repository.CartRepository;
 import org.hibernate.Hibernate;
@@ -32,9 +33,9 @@ public class CartService {
             cart = new Cart();
             session.setAttribute("cart", cart);
         } else {
-            Hibernate.initialize(cart.getProducts());
-            if (cart.getProducts() != null && !cart.getProducts().isEmpty()) {
-                Hibernate.initialize(cart.getProducts().get(0).getCarts());
+            Hibernate.initialize(cart.getCartItems());
+            for (CartItem cartItem : cart.getCartItems()) {
+                Hibernate.initialize(cartItem.getProduct());
             }
         }
         return cart;
@@ -49,10 +50,14 @@ public class CartService {
         session.setAttribute("totalPrice", totalPrice);
     }
 
+    public BigDecimal getQuantityProduct(CartItem cartItem) {
+        return cartItem.getProduct().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+    }
+
     public BigDecimal calculateTotalPrice(Cart cart) {
         BigDecimal totalPrice = BigDecimal.ZERO;
-        for (Product product : cart.getProducts()) {
-            totalPrice = totalPrice.add(product.getPrice());
+        for (CartItem cartItem : cart.getCartItems()) {
+            totalPrice = totalPrice.add(getQuantityProduct(cartItem));
         }
 
         return totalPrice;

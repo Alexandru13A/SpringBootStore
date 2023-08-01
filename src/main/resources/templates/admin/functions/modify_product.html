@@ -15,6 +15,7 @@
 <p>Product Long Description: <span th:text="${longDescription}"></span></p>
 <p>Product Price: <span th:text="${price}"></span></p>
 <p>Product Category: <span th:text="${category}"></span></p>
+<p>Product Brand: <span th:text="${brand}"></span></p>
 <td>
     <img th:src="@{'/shopping/product/image/' + ${product.productId}}" alt="Product Image"
         class="product-image"/>
@@ -52,6 +53,19 @@
 
         <label for="category">Product Category:</label>
         <input type="text" id="category" name="category" th:value="${category}"
+               required
+               pattern=".*\S+.*"/>
+
+        <label for="brand">Product Brand:</label>
+        <input type="text" id="brand" name="brand" th:value="${brand}"
+               required
+               pattern=".*\S+.*"/>
+        <label for="brand">Product Type:</label>
+        <input type="text" id="type" name="type" th:value="${type}"
+               required
+               pattern=".*\S+.*"/>
+        <label for="brand">Product Gender:</label>
+        <input type="text" id="gender" name="gender" th:value="${gender}"
                required
                pattern=".*\S+.*"/>
 
